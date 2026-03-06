@@ -1,6 +1,7 @@
 # Resolve MUN Website
 
 Resolve MUN event website for **June 12, 13, 14**.
+Currently live at - https://25sh0363-code.github.io/Resolve-MUN/
 
 ## Main Features
 
