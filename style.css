@@ -1,20 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Exo+2:wght@400;500;600;700&family=Orbitron:wght@500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
 :root {
-  --bg-0: #03060d;
-  --bg-1: #08101d;
-  --bg-2: #0f1e33;
-  --line: rgba(132, 194, 255, 0.22);
-  --line-strong: rgba(132, 194, 255, 0.45);
-  --text-main: #eff7ff;
-  --text-soft: #b7d2ef;
-  --accent-cyan: #59d8ff;
-  --accent-amber: #ffbe5a;
-  --accent-red: #ff646e;
+  --bg-0: #0a0710;
+  --bg-1: #100c1a;
+  --bg-2: #18122a;
+  --purple-bright: #c084fc;
+  --purple-mid:    #9b72f5;
+  --purple-deep:   #6d28d9;
+  --rose:          #e879a8;
+  --lavender:      #bba8f5;
+  --line:          rgba(155, 114, 245, 0.18);
+  --line-strong:   rgba(192, 132, 252, 0.38);
+  --text-main:  #f0eafa;
+  --text-soft:  #b8a8d8;
+  --text-muted: #7b6a9e;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
   --max-width: 1160px;
-  --accent-violet: #9b72f5;
-  --accent-gold: #c9993e;
-  --font-display: "Cormorant Garamond", serif;
 }
 
 * {
@@ -34,13 +36,15 @@ body {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  font-family: "Exo 2", sans-serif;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
   color: var(--text-main);
   background:
-    radial-gradient(ellipse at 14% 12%, rgba(120, 80, 255, 0.22), transparent 42%),
-    radial-gradient(ellipse at 88% 10%, rgba(212, 168, 85, 0.14), transparent 38%),
-    radial-gradient(ellipse at 52% 90%, rgba(80, 40, 200, 0.16), transparent 44%),
-    linear-gradient(170deg, var(--bg-0) 0%, var(--bg-1) 55%, var(--bg-2) 100%);
+    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(109, 40, 217, 0.28), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 15%,  rgba(192, 132, 252, 0.12), transparent 50%),
+    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(109, 40, 217, 0.18), transparent 55%),
+    linear-gradient(160deg, var(--bg-0) 0%, #0e0b1e 55%, #150f28 100%);
   overflow-x: hidden;
 }
 
@@ -74,23 +78,23 @@ a {
 }
 
 .orb-a {
-  width: 500px;
-  height: 500px;
+  width: 560px;
+  height: 560px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(120, 80, 255, 0.52), rgba(70, 30, 180, 0.14));
-  top: -180px;
-  left: -150px;
-  animation: driftA 18s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(109, 40, 217, 0.46), rgba(76, 20, 160, 0.10));
+  top: -220px;
+  left: -180px;
+  animation: driftA 20s ease-in-out infinite;
 }
 
 .orb-b {
-  width: 540px;
-  height: 540px;
+  width: 480px;
+  height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 168, 85, 0.34), rgba(180, 100, 40, 0.09));
-  right: -200px;
-  top: 28vh;
-  animation: driftB 22s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(232, 121, 168, 0.22), rgba(155, 114, 245, 0.08));
+  right: -160px;
+  top: 30vh;
+  animation: driftB 25s ease-in-out infinite;
 }
 
 .cursor-dot {
@@ -103,8 +107,8 @@ a {
   border-radius: 50%;
   pointer-events: none;
   z-index: 62;
-  background: var(--accent-amber);
-  box-shadow: 0 0 8px rgba(201, 153, 62, 0.9);
+  background: var(--purple-bright);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.9);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -213,32 +217,36 @@ main,
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   text-decoration: none;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-main);
 }
 
 .brand-mark {
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   border: 1px solid var(--line-strong);
-  box-shadow: 0 0 20px rgba(89, 216, 255, 0.45);
-  background:
-    conic-gradient(from 220deg, rgba(89, 216, 255, 0.85), rgba(255, 190, 90, 0.78), rgba(89, 216, 255, 0.85));
+  box-shadow: 0 0 18px rgba(192, 132, 252, 0.4);
+  background: conic-gradient(from 200deg, rgba(192, 132, 252, 0.9), rgba(232, 121, 168, 0.8), rgba(192, 132, 252, 0.9));
 }
 
 .brand-text {
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .brand-sub {
   display: block;
-  font-family: "Exo 2", sans-serif;
-  letter-spacing: 0.2em;
-  font-size: 0.58rem;
-  color: var(--text-soft);
+  font-family: var(--font-body);
+  font-style: normal;
+  letter-spacing: 0.18em;
+  font-size: 0.52rem;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .nav-links {
@@ -266,7 +274,7 @@ main,
   height: 1px;
   transform: scaleX(0);
   transform-origin: left;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber));
+  background: linear-gradient(90deg, var(--purple-bright), var(--rose));
   transition: transform 0.25s ease;
 }
 
@@ -284,8 +292,9 @@ main,
   font-size: 0.72rem;
   text-decoration: none;
   color: var(--text-main);
-  background: linear-gradient(115deg, rgba(89, 216, 255, 0.18), rgba(255, 190, 90, 0.12));
-  box-shadow: 0 0 30px rgba(89, 216, 255, 0.12);
+  background: linear-gradient(115deg, rgba(155, 114, 245, 0.22), rgba(232, 121, 168, 0.14));
+  box-shadow: 0 0 24px rgba(155, 114, 245, 0.15);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .menu-btn {
@@ -333,25 +342,30 @@ main,
   font-family: var(--font-display);
   font-style: italic;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  line-height: 0.9;
-  font-size: clamp(3rem, 7.8vw, 7rem);
-  text-shadow: 0 0 42px rgba(155, 114, 245, 0.22), 0 2px 6px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  text-shadow: 0 0 60px rgba(192, 132, 252, 0.25), 0 2px 8px rgba(0, 0, 0, 0.6);
   font-weight: 600;
 }
 
 .hero h1 span,
 .title-xl span {
   display: block;
-  color: var(--accent-cyan);
+  background: linear-gradient(135deg, var(--purple-bright) 20%, var(--rose) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tagline {
-  font-family: "Orbitron", sans-serif;
-  margin: 0.9rem 0 0;
-  font-size: clamp(0.8rem, 1.4vw, 1rem);
-  letter-spacing: 0.3em;
-  color: var(--accent-amber);
+  font-family: var(--font-body);
+  margin: 1rem 0 0;
+  font-size: clamp(0.72rem, 1.3vw, 0.88rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  font-weight: 500;
 }
 
 .hero p {
@@ -376,14 +390,19 @@ main,
 
 .metric strong {
   display: block;
-  font-family: "Orbitron", sans-serif;
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--purple-bright);
+  line-height: 1;
 }
 
 .metric small {
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
-  color: var(--text-soft);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .hero-actions {
@@ -405,19 +424,20 @@ main,
 }
 
 .btn-primary {
-  background: linear-gradient(125deg, rgba(89, 216, 255, 0.25), rgba(255, 190, 90, 0.25));
+  background: linear-gradient(130deg, rgba(155, 114, 245, 0.3), rgba(232, 121, 168, 0.22));
   color: var(--text-main);
-  box-shadow: 0 0 24px rgba(89, 216, 255, 0.22);
+  box-shadow: 0 0 28px rgba(155, 114, 245, 0.22);
 }
 
 .btn-secondary {
-  color: var(--text-main);
-  background: rgba(9, 17, 29, 0.76);
+  color: var(--text-soft);
+  background: rgba(30, 18, 55, 0.55);
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  border-color: rgba(89, 216, 255, 0.9);
+  border-color: rgba(192, 132, 252, 0.7);
+  box-shadow: 0 6px 28px rgba(155, 114, 245, 0.28);
 }
 
 .countdown-wrap {
@@ -429,9 +449,9 @@ main,
 .countdown-head {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.68rem;
-  color: var(--accent-amber);
+  letter-spacing: 0.2em;
+  font-size: 0.64rem;
+  color: var(--lavender);
 }
 
 .countdown-grid {
@@ -444,21 +464,28 @@ main,
 .time-box {
   text-align: center;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.58rem;
-  background: rgba(10, 21, 38, 0.8);
+  border-radius: 12px;
+  padding: 0.6rem;
+  background: rgba(30, 18, 55, 0.45);
 }
 
 .time-box span {
-  font-family: "Orbitron", sans-serif;
-  font-size: 1.35rem;
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--purple-bright);
+  line-height: 1;
 }
 
 .time-box small {
   display: block;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  color: var(--text-soft);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
 }
 
 .countdown-summary {
@@ -533,10 +560,10 @@ main,
   left: 14px;
   top: 12px;
   margin: 0;
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-cyan);
+  color: var(--lavender);
 }
 
 .holo-ping {
@@ -544,8 +571,8 @@ main,
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent-gold);
-  box-shadow: 0 0 10px rgba(201, 153, 62, 0.65);
+  background: var(--rose);
+  box-shadow: 0 0 10px rgba(232, 121, 168, 0.7);
   animation: ping 3.2s ease-in-out infinite;
 }
 
@@ -610,16 +637,20 @@ main,
 }
 
 .cell strong {
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(1.15rem, 2.6vw, 1.65rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+  color: var(--purple-bright);
+  line-height: 1;
 }
 
 .cell small {
   display: block;
-  margin-top: 0.25rem;
-  font-size: 0.64rem;
+  margin-top: 0.3rem;
+  font-size: 0.62rem;
   letter-spacing: 0.18em;
-  color: var(--text-soft);
+  color: var(--text-muted);
 }
 
 .section {
@@ -637,17 +668,19 @@ main,
   font-style: italic;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+  font-size: clamp(1.9rem, 3.8vw, 3.1rem);
   font-weight: 600;
-  margin: 0.35rem 0 0;
+  margin: 0.3rem 0 0;
+  line-height: 1;
 }
 
 .section-kicker {
   margin: 0;
-  color: var(--accent-amber);
+  color: var(--purple-bright);
   text-transform: uppercase;
-  letter-spacing: 0.19em;
-  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  font-size: 0.62rem;
+  font-weight: 500;
 }
 
 .section-intro {
@@ -677,9 +710,11 @@ main,
 }
 
 .number-card .num {
-  font-family: "Orbitron", sans-serif;
-  color: var(--accent-cyan);
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--purple-bright);
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .grid-3 {
@@ -737,10 +772,12 @@ main,
 
 .card h4 {
   margin: 0;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.08em;
-  font-size: 0.86rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: 0.84rem;
   text-transform: uppercase;
+  color: var(--lavender);
 }
 
 .card p {
@@ -779,7 +816,7 @@ main,
   inset: -120% 40% auto auto;
   width: 360px;
   height: 360px;
-  background: radial-gradient(circle, rgba(89, 216, 255, 0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.18), transparent 70%);
 }
 
 .partners {
@@ -815,10 +852,12 @@ main,
 
 .footer h5 {
   margin: 0 0 0.35rem;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.11em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  color: var(--lavender);
 }
 
 .footer p,
@@ -979,7 +1018,7 @@ main,
     top: 72px;
     right: 4vw;
     left: 4vw;
-    background: rgba(5, 11, 19, 0.97);
+    background: rgba(10, 6, 18, 0.97);
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 0.85rem;
@@ -1133,6 +1172,6 @@ main,
 .tw-cursor::after {
   content: "|";
   animation: typewriterBlink 0.9s ease-in-out infinite;
-  color: var(--accent-amber);
+  color: var(--purple-bright);
   margin-left: 2px;
 }
