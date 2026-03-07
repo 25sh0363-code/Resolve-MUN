@@ -1047,112 +1047,188 @@ main,
 }
 
 @media (max-width: 760px) {
-  /* Nav: hamburger menu */
-  .menu-btn {
-    display: flex;
-    align-items: center;
+  /* ── Bottom nav: visible on mobile ── */
+  .mob-nav { display: flex; }
+
+  /* ── Body: clear bottom nav ── */
+  body { padding-bottom: 68px; }
+
+  /* ── Header: slim logo-only bar ── */
+  .menu-btn { display: none; }
+  .header-cta { display: none; }
+  .nav-links { display: none !important; }
+
+  .header-inner {
+    min-height: 52px;
     justify-content: center;
-    min-height: 44px;
-    padding: 0 0.75rem;
   }
 
-  .header-cta {
-    display: none;
+  .brand-sub { display: none; }
+
+  /* ── Hero: stacked center-aligned ── */
+  .hero {
+    grid-template-columns: 1fr;
+    margin-top: 0.6rem;
+    gap: 0.65rem;
   }
 
-  .nav-links {
-    position: fixed;
-    top: 72px;
-    right: 4vw;
-    left: 4vw;
-    background: rgba(10, 6, 18, 0.97);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 0.85rem;
-    display: none;
+  .hero-panel {
+    padding: 1.4rem 1rem;
+    border-radius: 18px;
+    text-align: center;
+  }
+
+  .hero h1,
+  .title-xl {
+    font-size: clamp(3rem, 13vw, 5rem);
+    margin: 0.55rem 0 0;
+  }
+
+  .tagline {
+    margin: 0.55rem auto 0;
+    font-size: 0.66rem;
+  }
+
+  .badge {
+    margin: 0 auto;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Metrics: keep 3-col, compact ── */
+  .metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+  }
+
+  .metric {
+    padding: 0.65rem 0.35rem;
+  }
+
+  .metric strong {
+    font-size: 1.2rem;
+  }
+
+  /* ── Buttons: full width ── */
+  .hero-actions {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-    backdrop-filter: blur(14px);
+    margin-top: 0.9rem;
   }
 
-  /* Larger tap targets for nav links */
-  .nav-links a {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+  .btn {
     width: 100%;
-    padding: 0.5rem 0.3rem;
-    font-size: 0.9rem;
+    text-align: center;
+    padding: 0.9rem 1rem;
   }
 
-  body.menu-open .nav-links {
-    display: flex;
-  }
-
-  /* Hero visual: single column, restore countdown separator */
+  /* ── Hero visual: countdown only (holo-cards hidden) ── */
   .hero-visual {
     grid-template-columns: 1fr;
   }
 
-  .countdown-wrap {
-    grid-column: auto;
-    border-top: 1px solid var(--line);
-    margin-top: 1rem;
-    padding-top: 1rem;
-  }
-
-  /* Hide second decorative holo-card on mobile */
-  .hero-visual > .holo-card:last-child {
+  .hero-visual > .holo-card {
     display: none;
   }
 
-  .holo-card {
-    min-height: 140px;
+  .countdown-wrap {
+    grid-column: auto;
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
   }
 
   .countdown-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
   }
 
+  .time-box {
+    padding: 0.8rem 0.4rem;
+  }
+
+  .time-box span {
+    font-size: 1.7rem;
+  }
+
+  /* ── Stats ribbon: 2×2 ── */
+  .stats-ribbon {
+    border-radius: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-ribbon .cell {
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 0.6rem;
+  }
+
+  .stats-ribbon .cell:nth-child(even) {
+    border-right: 0;
+  }
+
+  .stats-ribbon .cell:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+
+  /* ── All grids: single column ── */
   .grid-3,
   .grid-2,
   .partners,
   .feature-list,
-  .metrics,
-  .number-grid {
+  .number-grid,
+  .split {
     grid-template-columns: 1fr;
   }
 
-  /* Slightly smaller hero title on narrow screens */
-  .hero h1,
-  .title-xl {
-    font-size: clamp(2.8rem, 10vw, 4.5rem);
+  /* ── Sections ── */
+  .section {
+    padding: 1.15rem;
+    border-radius: 14px;
+    margin-top: 0.65rem;
   }
 
-  /* Stack CTA buttons vertically */
-  .hero-actions {
-    flex-direction: column;
+  .section h2,
+  .section h3 {
+    font-size: clamp(1.7rem, 7vw, 2.6rem);
   }
 
-  /* Footer: single column */
+  /* ── Cards ── */
+  .card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .card h4 {
+    font-size: 0.9rem;
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    line-height: 1.52;
+  }
+
+  .number-card {
+    padding: 1rem;
+  }
+
+  /* ── Footer ── */
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 1.4rem;
   }
 
-  /* Reduce globe visual weight on mobile */
+  /* ── Decorative globes: hidden ── */
   .wire-globe {
-    opacity: 0.18;
-    width: 110px;
+    display: none;
   }
 
-  .section {
-    border-radius: 12px;
-  }
-
-  .stats-ribbon {
-    border-radius: 10px;
+  /* ── Secret badge: above bottom nav ── */
+  .secret-badge {
+    bottom: calc(68px + 0.5rem);
   }
 }
 
@@ -1175,29 +1251,21 @@ main,
 @media (max-width: 480px) {
   .hero h1,
   .title-xl {
-    font-size: clamp(2.2rem, 12vw, 3.2rem);
+    font-size: clamp(2.5rem, 13vw, 3.5rem);
   }
 
   .header-inner {
-    min-height: 60px;
-  }
-
-  .nav-links {
-    top: 60px;
+    min-height: 48px;
   }
 
   .hero-panel {
-    padding: 0.9rem;
+    padding: 1rem 0.85rem;
     border-radius: 14px;
   }
 
   .section {
-    padding: 0.85rem;
-    border-radius: 10px;
-  }
-
-  .holo-card {
-    min-height: 110px;
+    padding: 0.9rem;
+    border-radius: 12px;
   }
 
   .metric strong,
@@ -1205,16 +1273,20 @@ main,
     font-size: 1.15rem;
   }
 
+  .time-box span {
+    font-size: 1.45rem;
+  }
+
   .countdown-grid {
     gap: 0.3rem;
   }
 
   .time-box {
-    padding: 0.5rem 0.3rem;
+    padding: 0.6rem 0.3rem;
   }
 
   .stats-ribbon .cell {
-    padding: 0.65rem 0.5rem;
+    padding: 0.7rem 0.4rem;
   }
 
   .ambient {
@@ -1222,7 +1294,7 @@ main,
   }
 
   .hero {
-    margin-top: 0.8rem;
+    margin-top: 0.5rem;
   }
 
   .badge {
@@ -1268,11 +1340,11 @@ main,
   }
 
   .footer-note {
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-bottom: max(1rem, calc(env(safe-area-inset-bottom) + 0.5rem));
   }
 
-  body.menu-open .nav-links {
-    padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
+  .mob-nav {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
