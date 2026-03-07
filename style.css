@@ -133,8 +133,8 @@ a {
   width: 68px;
   height: 68px;
   margin: -34px 0 0 -34px;
-  border-color: rgba(201, 153, 62, 0.65);
-  background: radial-gradient(circle, rgba(201, 153, 62, 0.07) 0, transparent 70%);
+  border-color: rgba(232, 121, 168, 0.65);
+  background: radial-gradient(circle, rgba(232, 121, 168, 0.07) 0, transparent 70%);
 }
 
 .floating-globes {
@@ -178,14 +178,14 @@ a {
   right: -110px;
   top: 26%;
   width: 280px;
-  border-color: rgba(212, 168, 85, 0.38);
-  box-shadow: 0 0 45px rgba(212, 168, 85, 0.09), inset 0 0 30px rgba(212, 168, 85, 0.07);
+  border-color: rgba(232, 121, 168, 0.28);
+  box-shadow: 0 0 45px rgba(232, 121, 168, 0.07), inset 0 0 30px rgba(232, 121, 168, 0.05);
   animation-duration: 24s;
 }
 
 .globe-right::before,
 .globe-right::after {
-  border-color: rgba(212, 168, 85, 0.24);
+  border-color: rgba(232, 121, 168, 0.18);
 }
 
 .site-header,
@@ -200,8 +200,8 @@ main,
   top: 0;
   z-index: 40;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(132, 194, 255, 0.16);
-  background: rgba(3, 8, 16, 0.72);
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 4, 14, 0.82);
 }
 
 .header-inner {
@@ -263,6 +263,7 @@ main,
   color: var(--text-soft);
   padding: 0.45rem 0.2rem;
   position: relative;
+  touch-action: manipulation;
 }
 
 .nav-links a::after {
@@ -303,7 +304,11 @@ main,
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--text-main);
-  padding: 0.4rem 0.55rem;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
 }
 
 .hero {
@@ -420,6 +425,7 @@ main,
   text-transform: uppercase;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
+  touch-action: manipulation;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
@@ -508,7 +514,7 @@ main,
   min-height: 210px;
   background:
     linear-gradient(135deg, rgba(9, 19, 35, 0.88), rgba(5, 12, 22, 0.9)),
-    radial-gradient(circle at 76% 26%, rgba(89, 216, 255, 0.18), transparent 35%);
+    radial-gradient(circle at 76% 26%, rgba(192, 132, 252, 0.14), transparent 35%);
 }
 
 .holo-card::before {
@@ -968,8 +974,8 @@ main,
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 50px rgba(0, 0, 0, 0.35);
   }
   50% {
-    border-color: rgba(89, 216, 255, 0.46);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 56px rgba(0, 0, 0, 0.4), 0 0 34px rgba(89, 216, 255, 0.17);
+    border-color: rgba(192, 132, 252, 0.46);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 56px rgba(0, 0, 0, 0.4), 0 0 34px rgba(155, 114, 245, 0.22);
   }
 }
 
@@ -983,16 +989,29 @@ main,
 }
 
 @media (max-width: 980px) {
-  .hero,
-  .split,
-  .footer-inner {
+  /* Hero: stack panels vertically */
+  .hero {
+    grid-template-columns: 1fr;
+    margin-top: 1.4rem;
+    gap: 0.9rem;
+  }
+
+  .split {
     grid-template-columns: 1fr;
   }
 
+  /* Footer: 2-col on tablet */
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .grid-3,
-  .partners,
   .feature-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partners {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .stats-ribbon {
@@ -1002,11 +1021,39 @@ main,
   .stats-ribbon .cell {
     border-bottom: 1px solid var(--line);
   }
+
+  /* Remove right border from even cells in 2-col layout */
+  .stats-ribbon .cell:nth-child(even) {
+    border-right: 0;
+  }
+
+  /* Remove bottom border from last row cells */
+  .stats-ribbon .cell:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+
+  /* Hero visual: countdown full-width, holo-cards side by side */
+  .hero-visual {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+
+  .countdown-wrap {
+    grid-column: 1 / -1;
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 760px) {
+  /* Nav: hamburger menu */
   .menu-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 0.75rem;
   }
 
   .header-cta {
@@ -1025,11 +1072,43 @@ main,
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.45rem;
+    gap: 0.25rem;
+    backdrop-filter: blur(14px);
+  }
+
+  /* Larger tap targets for nav links */
+  .nav-links a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.9rem;
   }
 
   body.menu-open .nav-links {
     display: flex;
+  }
+
+  /* Hero visual: single column, restore countdown separator */
+  .hero-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .countdown-wrap {
+    grid-column: auto;
+    border-top: 1px solid var(--line);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  /* Hide second decorative holo-card on mobile */
+  .hero-visual > .holo-card:last-child {
+    display: none;
+  }
+
+  .holo-card {
+    min-height: 140px;
   }
 
   .countdown-grid {
@@ -1045,9 +1124,35 @@ main,
     grid-template-columns: 1fr;
   }
 
+  /* Slightly smaller hero title on narrow screens */
+  .hero h1,
+  .title-xl {
+    font-size: clamp(2.8rem, 10vw, 4.5rem);
+  }
+
+  /* Stack CTA buttons vertically */
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  /* Footer: single column */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  /* Reduce globe visual weight on mobile */
   .wire-globe {
-    opacity: 0.38;
-    width: 140px;
+    opacity: 0.18;
+    width: 110px;
+  }
+
+  .section {
+    border-radius: 12px;
+  }
+
+  .stats-ribbon {
+    border-radius: 10px;
   }
 }
 
@@ -1063,6 +1168,111 @@ main,
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ── Small mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1,
+  .title-xl {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  .header-inner {
+    min-height: 60px;
+  }
+
+  .nav-links {
+    top: 60px;
+  }
+
+  .hero-panel {
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
+
+  .section {
+    padding: 0.85rem;
+    border-radius: 10px;
+  }
+
+  .holo-card {
+    min-height: 110px;
+  }
+
+  .metric strong,
+  .time-box span {
+    font-size: 1.15rem;
+  }
+
+  .countdown-grid {
+    gap: 0.3rem;
+  }
+
+  .time-box {
+    padding: 0.5rem 0.3rem;
+  }
+
+  .stats-ribbon .cell {
+    padding: 0.65rem 0.5rem;
+  }
+
+  .ambient {
+    background-size: 48px 48px;
+  }
+
+  .hero {
+    margin-top: 0.8rem;
+  }
+
+  .badge {
+    font-size: 0.56rem;
+  }
+}
+
+/* ── Touch device optimizations ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable 3D tilt on touch */
+  .tilt {
+    transform-style: flat;
+  }
+
+  /* Prevent stuck hover states on tap */
+  .card:hover,
+  .metric:hover {
+    transform: none;
+  }
+
+  .hero-panel:hover {
+    border-color: var(--line);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 50px rgba(0, 0, 0, 0.35);
+    transform: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  /* Save GPU on mobile — softer orbs */
+  .orb {
+    opacity: 0.4;
+    filter: blur(50px);
+  }
+}
+
+/* ── Safe area insets (notch / home-bar devices) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .site-header .header-inner {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .footer-note {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  body.menu-open .nav-links {
+    padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
   }
 }
 
