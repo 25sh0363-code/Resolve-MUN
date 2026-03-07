@@ -388,17 +388,26 @@ function setupEasterEggs() {
   });
 
   // ③ Logo taps — 3× on mobile = secret popup, 7× on desktop = badge
-  let clicks = 0, timer = null;
+  let tapCount = 0, tapTimer = null;
   const brand = document.querySelector(".brand");
   if (brand) {
+    // Use touchstart for instant response on mobile (no 300ms delay)
+    brand.addEventListener("touchstart", (e) => {
+      e.preventDefault(); // stop navigation + stop the ghost click
+      tapCount++;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => { tapCount = 0; }, 1800);
+      if (tapCount === 3) { showSecretPopup(); tapCount = 0; }
+    }, { passive: false });
+
+    // Desktop fallback: 7 clicks
     brand.addEventListener("click", (e) => {
+      if (window.matchMedia("(pointer: coarse)").matches) { e.preventDefault(); return; }
       e.preventDefault();
-      clicks++;
-      clearTimeout(timer);
-      timer = setTimeout(() => { clicks = 0; }, 1800);
-      const isMobile = window.matchMedia("(pointer: coarse)").matches;
-      if (isMobile && clicks === 3) { showSecretPopup(); clicks = 0; return; }
-      if (!isMobile && clicks === 7) { showBadge("🌍 All 193 nations stand ready"); burstParticles(); clicks = 0; }
+      tapCount++;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => { tapCount = 0; }, 1800);
+      if (tapCount === 7) { showBadge("🌍 All 193 nations stand ready"); burstParticles(); tapCount = 0; }
     });
   }
 }
