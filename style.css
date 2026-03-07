@@ -919,7 +919,7 @@ main,
 
 /* ── Mobile bottom navigation (hidden on desktop) ── */
 .mob-nav {
-  display: none;
+  display: none !important;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1110,7 +1110,7 @@ main,
 
 @media (max-width: 760px) {
   /* ── Bottom nav: visible on mobile ── */
-  .mob-nav { display: flex; }
+  .mob-nav { display: flex !important; }
 
   /* ── Body: clear bottom nav ── */
   body { padding-bottom: 68px; }
