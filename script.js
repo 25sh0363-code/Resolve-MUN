@@ -345,6 +345,30 @@ function burstParticles() {
   }
 }
 
+function showSecretPopup() {
+  if (document.getElementById("secret-drink-popup")) return;
+  const overlay = document.createElement("div");
+  overlay.id = "secret-drink-popup";
+  overlay.innerHTML = `
+    <div class="sdp-card">
+      <div class="sdp-icon">🍵</div>
+      <p class="sdp-eyebrow">YOU FOUND IT</p>
+      <h2 class="sdp-title">Secret Unlocked</h2>
+      <p class="sdp-body">Show this to <strong>Tech USG&nbsp;– Omsuraj</strong> on <strong>Day&nbsp;2</strong> of Resolve MUN to claim a free drink on him.</p>
+      <p class="sdp-fine">⚠️ Only valid for the <strong>first 2 people</strong> who find this. First come, first served.</p>
+      <button class="sdp-close">Got It — I'm Claiming This 🎉</button>
+    </div>
+  `;
+  document.body.append(overlay);
+  requestAnimationFrame(() => overlay.classList.add("visible"));
+  const close = () => {
+    overlay.classList.remove("visible");
+    setTimeout(() => overlay.remove(), 420);
+  };
+  overlay.querySelector(".sdp-close").addEventListener("click", close);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+}
+
 function setupEasterEggs() {
   // ① Konami Code
   const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown",
@@ -363,7 +387,7 @@ function setupEasterEggs() {
     if (typed === "RESOLVE") { showBadge("⚖️ The chamber recognizes your resolve"); burstParticles(); typed = ""; }
   });
 
-  // ③ Click brand logo 7 times
+  // ③ Logo taps — 3× on mobile = secret popup, 7× on desktop = badge
   let clicks = 0, timer = null;
   const brand = document.querySelector(".brand");
   if (brand) {
@@ -371,8 +395,10 @@ function setupEasterEggs() {
       e.preventDefault();
       clicks++;
       clearTimeout(timer);
-      timer = setTimeout(() => { clicks = 0; }, 1500);
-      if (clicks === 7) { showBadge("🌍 All 193 nations stand ready"); burstParticles(); clicks = 0; }
+      timer = setTimeout(() => { clicks = 0; }, 1800);
+      const isMobile = window.matchMedia("(pointer: coarse)").matches;
+      if (isMobile && clicks === 3) { showSecretPopup(); clicks = 0; return; }
+      if (!isMobile && clicks === 7) { showBadge("🌍 All 193 nations stand ready"); burstParticles(); clicks = 0; }
     });
   }
 }
