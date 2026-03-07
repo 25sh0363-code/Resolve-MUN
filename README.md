@@ -30,3 +30,6 @@ Currently live at: https://25sh0363-code.github.io/Resolve-MUN/
 - HTML
 - CSS
 - JavaScript
+
+#Creater
+-Om Suraj -silveraoaks international
