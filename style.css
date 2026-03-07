@@ -1109,87 +1109,133 @@ main,
 }
 
 @media (max-width: 760px) {
-  /* ── Bottom nav: visible on mobile ── */
+  /* ══════════════════════════════════════
+     MOBILE WEB APP — complete override
+     Desktop styles untouched above 760px
+  ══════════════════════════════════════ */
+
+  /* ── Bottom nav ── */
   .mob-nav { display: flex !important; }
 
-  /* ── Body: clear bottom nav ── */
-  body { padding-bottom: 68px; }
-
-  /* ── Header: slim logo-only bar ── */
-  .menu-btn { display: none; }
-  .header-cta { display: none; }
-  .nav-links { display: none !important; }
-
-  .header-inner {
-    min-height: 52px;
-    justify-content: center;
+  /* ── Root spacing adjustments ── */
+  :root {
+    --max-width: 100%;
   }
 
-  .brand-sub { display: none; }
+  /* ── Body ── */
+  body {
+    padding-bottom: 72px;
+    overflow-x: hidden;
+  }
 
-  /* ── Hero: stacked center-aligned ── */
+  /* ── Header: thin centered logo strip ── */
+  .menu-btn  { display: none; }
+  .header-cta { display: none; }
+  .nav-links  { display: none !important; }
+  .brand-sub  { display: none; }
+
+  .site-header {
+    backdrop-filter: blur(18px);
+  }
+
+  .header-inner {
+    min-height: 54px;
+    justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  /* ── Hero: full-bleed immersive card ── */
   .hero {
-    grid-template-columns: 1fr;
-    margin-top: 0.6rem;
-    gap: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    gap: 0;
+    padding: 0 0.85rem;
+    box-sizing: border-box;
   }
 
   .hero-panel {
-    padding: 1.4rem 1rem;
-    border-radius: 18px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    padding: 1.6rem 1.2rem 1.4rem;
     text-align: center;
+    margin-bottom: 0.65rem;
+    background: linear-gradient(160deg, rgba(18, 10, 38, 0.96), rgba(10, 7, 22, 0.92));
   }
 
+  /* Hero title: big and bold */
   .hero h1,
   .title-xl {
-    font-size: clamp(3rem, 13vw, 5rem);
-    margin: 0.55rem 0 0;
-  }
-
-  .tagline {
-    margin: 0.55rem auto 0;
-    font-size: 0.66rem;
+    font-size: clamp(3.4rem, 16vw, 5.2rem);
+    margin: 0.5rem 0 0;
+    line-height: 0.85;
   }
 
   .badge {
+    display: inline-flex;
     margin: 0 auto;
+    font-size: 0.58rem;
+  }
+
+  .tagline {
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    margin: 0.7rem auto 0;
   }
 
   .hero p {
     margin-left: auto;
     margin-right: auto;
+    font-size: 0.9rem;
   }
 
-  /* ── Metrics: keep 3-col, compact ── */
+  /* Metrics: 3 columns, pill-style */
   .metrics {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.4rem;
-    margin-top: 0.9rem;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
   .metric {
-    padding: 0.65rem 0.35rem;
+    padding: 0.75rem 0.3rem;
+    border-radius: 14px;
   }
 
   .metric strong {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
-  /* ── Buttons: full width ── */
+  .metric small {
+    font-size: 0.55rem;
+  }
+
+  /* Buttons: full-width stacked */
   .hero-actions {
     flex-direction: column;
-    margin-top: 0.9rem;
+    gap: 0.55rem;
+    margin-top: 1rem;
   }
 
   .btn {
     width: 100%;
     text-align: center;
-    padding: 0.9rem 1rem;
+    padding: 1rem 1rem;
+    font-size: 0.74rem;
+    border-radius: 14px;
   }
 
-  /* ── Hero visual: countdown only (holo-cards hidden) ── */
+  /* Countdown panel: standalone card */
   .hero-visual {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
   }
 
   .hero-visual > .holo-card {
@@ -1197,43 +1243,105 @@ main,
   }
 
   .countdown-wrap {
-    grid-column: auto;
     border-top: none;
     margin-top: 0;
     padding-top: 0;
     text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 1.2rem 1rem;
+    background: linear-gradient(160deg, rgba(18, 10, 38, 0.96), rgba(10, 7, 22, 0.92));
+  }
+
+  .countdown-head {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.65rem;
   }
 
   .countdown-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.4rem;
+    display: grid;
   }
 
   .time-box {
-    padding: 0.8rem 0.4rem;
+    padding: 0.75rem 0.25rem;
+    border-radius: 12px;
+    background: rgba(30, 15, 60, 0.6);
   }
 
   .time-box span {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
+    line-height: 1;
   }
 
-  /* ── Stats ribbon: 2×2 ── */
+  .time-box small {
+    font-size: 0.48rem;
+    margin-top: 0.2rem;
+  }
+
+  .countdown-summary {
+    font-size: 0.7rem;
+    margin-top: 0.6rem;
+  }
+
+  /* ── Stats ribbon: 2×2 grid ── */
   .stats-ribbon {
-    border-radius: 10px;
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    width: calc(100% - 1.7rem);
+    margin: 0.65rem auto 0;
+    border-radius: 18px;
+    overflow: hidden;
   }
 
   .stats-ribbon .cell {
+    padding: 1.1rem 0.7rem;
     border-bottom: 1px solid var(--line);
-    padding: 1rem 0.6rem;
+    border-right: 1px solid var(--line);
   }
 
   .stats-ribbon .cell:nth-child(even) {
-    border-right: 0;
+    border-right: none;
   }
 
   .stats-ribbon .cell:nth-last-child(-n+2) {
-    border-bottom: 0;
+    border-bottom: none;
+  }
+
+  .cell strong {
+    font-size: clamp(1.4rem, 6vw, 1.9rem);
+  }
+
+  .cell small {
+    font-size: 0.58rem;
+  }
+
+  /* ── Sections: full-bleed app cards ── */
+  .section {
+    width: calc(100% - 1.7rem);
+    margin: 0.65rem auto 0;
+    padding: 1.35rem 1.1rem;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+
+  .section h2,
+  .section h3 {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    line-height: 0.95;
+  }
+
+  .section-kicker {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+  }
+
+  .section-intro {
+    font-size: 0.92rem;
+    line-height: 1.58;
+    margin-top: 0.6rem;
   }
 
   /* ── All grids: single column ── */
@@ -1244,54 +1352,79 @@ main,
   .number-grid,
   .split {
     grid-template-columns: 1fr;
+    gap: 0.55rem;
   }
 
-  /* ── Sections ── */
-  .section {
-    padding: 1.15rem;
-    border-radius: 14px;
-    margin-top: 0.65rem;
+  .feature-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .section h2,
-  .section h3 {
-    font-size: clamp(1.7rem, 7vw, 2.6rem);
-  }
-
-  /* ── Cards ── */
+  /* ── Cards: app-style ── */
   .card {
-    padding: 1rem;
-    border-radius: 14px;
+    padding: 1.1rem;
+    border-radius: 16px;
+    border-width: 1px;
   }
 
   .card h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
   }
 
   .card p {
-    font-size: 0.92rem;
-    line-height: 1.52;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .number-card {
     padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .number-card .num {
+    font-size: 1.3rem;
+  }
+
+  /* ── Partners: 2-col ── */
+  .partners {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── CTA section ── */
+  .cta-section {
+    text-align: center;
   }
 
   /* ── Footer ── */
+  .footer {
+    margin-top: 0.65rem;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 1.4rem;
+    width: calc(100% - 1.7rem);
+    margin: 0 auto;
+    padding: 1.2rem 0;
   }
 
-  /* ── Decorative globes: hidden ── */
-  .wire-globe {
-    display: none;
+  .footer-note {
+    width: calc(100% - 1.7rem);
+    text-align: center;
+    font-size: 0.62rem;
   }
 
-  /* ── Secret badge: above bottom nav ── */
+  /* ── Decorative globes: off ── */
+  .wire-globe { display: none; }
+
+  /* ── Secret badge above bottom nav ── */
   .secret-badge {
-    bottom: calc(68px + 0.5rem);
+    bottom: calc(72px + 0.6rem);
+    font-size: 0.76rem;
+    padding: 0.55rem 1.1rem;
   }
+
+  /* ── Stagger delays preserved ── */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1311,56 +1444,77 @@ main,
 
 /* ── Small mobile (≤ 480px) ── */
 @media (max-width: 480px) {
+  /* Smaller phones (SE, etc.) — scale everything down a notch */
+
   .hero h1,
   .title-xl {
-    font-size: clamp(2.5rem, 13vw, 3.5rem);
-  }
-
-  .header-inner {
-    min-height: 48px;
+    font-size: clamp(2.8rem, 14vw, 3.8rem);
   }
 
   .hero-panel {
-    padding: 1rem 0.85rem;
-    border-radius: 14px;
+    padding: 1.15rem 1rem;
+    border-radius: 16px;
   }
 
   .section {
-    padding: 0.9rem;
-    border-radius: 12px;
+    padding: 1rem 0.9rem;
+    border-radius: 16px;
+    width: calc(100% - 1.4rem);
   }
 
-  .metric strong,
+  .stats-ribbon {
+    width: calc(100% - 1.4rem);
+    border-radius: 14px;
+  }
+
+  .metric strong {
+    font-size: 1.1rem;
+  }
+
   .time-box span {
-    font-size: 1.15rem;
-  }
-
-  .time-box span {
-    font-size: 1.45rem;
-  }
-
-  .countdown-grid {
-    gap: 0.3rem;
+    font-size: 1.3rem;
   }
 
   .time-box {
-    padding: 0.6rem 0.3rem;
+    padding: 0.5rem 0.2rem;
+    border-radius: 10px;
+  }
+
+  .countdown-grid {
+    gap: 0.25rem;
+  }
+
+  .time-box small {
+    font-size: 0.42rem;
   }
 
   .stats-ribbon .cell {
-    padding: 0.7rem 0.4rem;
+    padding: 0.8rem 0.5rem;
+  }
+
+  .cell strong {
+    font-size: 1.3rem;
   }
 
   .ambient {
-    background-size: 48px 48px;
+    background-size: 44px 44px;
   }
 
-  .hero {
-    margin-top: 0.5rem;
+  .countdown-wrap {
+    padding: 1rem 0.75rem;
   }
 
-  .badge {
-    font-size: 0.56rem;
+  .btn {
+    font-size: 0.7rem;
+    padding: 0.9rem 0.9rem;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mob-nav-item span {
+    font-size: 0.55rem;
   }
 }
 
