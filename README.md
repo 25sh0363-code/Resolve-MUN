@@ -1,21 +1,32 @@
-# Resolve MUN Website
+# Resolve MUN Website (2026 Edition)
 
-Resolve MUN event website for **June 12, 13, 14**.
-Currently live at - https://25sh0363-code.github.io/Resolve-MUN/
+Multi-page conference website for Resolve MUN with a sci-fi diplomatic visual identity.
+Currently live at: https://25sh0363-code.github.io/Resolve-MUN/
 
-## Main Features
+## Pages
 
-- Instagram-inspired competitive purple/black theme
-- Hero section with UK-style texture elements
-- Committees section below hero
-- Live countdown to **June 12, 12:00 AM**
+- `index.html` - flagship landing page and high-level conference overview
+- `about.html` - conference mission, details, and experience
+- `committees.html` - all 8 committees and topic placeholders
+- `secretariat.html` - leadership structure placeholders
+- `venue.html` - venue reveal content and preview visuals
+- `register.html` - delegate/faculty registration flow overview
+
+## Design and Motion Features
+
+- Animated ambient background, glows, and moving gradient orbs
+- Custom cursor glow on pointer devices
+- Scroll reveal animations and interactive tilt cards
+- Shared responsive navigation with mobile menu toggle
+- Live countdown (conference opening timer)
+
+## Assets
+
+- `assets/images/venue-preview-1.png`
+- `assets/images/venue-preview-2.png`
 
 ## Built With
 
 - HTML
 - CSS
 - JavaScript
-
-## Ownership
-
-- Portfolio and maintenance: **Om Suraj**
