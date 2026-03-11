@@ -12,6 +12,22 @@ Currently live at: https://25sh0363-code.github.io/Resolve-MUN/
 - `venue.html` - venue reveal content and preview visuals
 - `register.html` - delegate/faculty registration flow overview
 
+## Delegate Registration System (Google Sheets + Apps Script)
+
+The website now includes a live delegate registration form in `register.html`.
+
+- Frontend form posts to an Apps Script Web App URL.
+- Apps Script writes each submission to a Google Sheet tab named `Delegate Registrations`.
+- Registration also requires proof of payment upload, saved in Google Drive.
+- Backend template is provided in `apps-script/Code.gs`.
+- Deployment guide is in `apps-script/README.md`.
+
+Quick connect step:
+
+1. Deploy Apps Script as a Web App.
+2. Copy the deployment URL.
+3. Paste it in `register.html` at `data-appscript-url` on `#delegate-registration-form`.
+
 ## Design and Motion Features
 
 - Animated ambient background, glows, and moving gradient orbs

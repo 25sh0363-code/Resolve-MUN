@@ -816,6 +816,169 @@ main,
   overflow: hidden;
 }
 
+.registration-form {
+  margin-top: 1rem;
+}
+
+.payment-qr-card {
+  margin-top: 1rem;
+}
+
+.payment-qr-card h4 {
+  margin-bottom: 0.35rem;
+}
+
+.payment-qr-media {
+  margin-top: 0.7rem;
+  max-width: 280px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.payment-qr-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-group span {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  font-weight: 500;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.72rem 0.8rem;
+  background: rgba(6, 14, 26, 0.72);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-group input[type="file"] {
+  padding: 0.58rem 0.65rem;
+}
+
+.field-group input[type="file"]::file-selector-button {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(155, 114, 245, 0.16);
+  color: var(--text-main);
+  padding: 0.4rem 0.65rem;
+  margin-right: 0.7rem;
+  cursor: pointer;
+}
+
+.field-help {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.field-group textarea {
+  resize: vertical;
+  min-height: 84px;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  outline: none;
+  border-color: rgba(192, 132, 252, 0.75);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.14);
+}
+
+.field-group-full {
+  grid-column: 1 / -1;
+}
+
+.consent-row {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: rgba(13, 10, 31, 0.72);
+}
+
+.consent-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--purple-bright);
+  flex-shrink: 0;
+}
+
+.consent-row span {
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.45;
+  color: var(--text-soft);
+  font-size: 0.84rem;
+}
+
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-actions {
+  margin-top: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.form-actions .btn {
+  cursor: pointer;
+}
+
+.form-actions .btn[disabled] {
+  opacity: 0.66;
+  cursor: not-allowed;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  letter-spacing: 0.03em;
+}
+
+.form-status.success {
+  color: #8be4a3;
+}
+
+.form-status.error {
+  color: #ff8fa8;
+}
+
 .cta-section::before {
   content: "";
   position: absolute;
@@ -1392,7 +1555,8 @@ main,
   /* ── Grids ── */
   .grid-2,
   .number-grid,
-  .split {
+  .split,
+  .form-grid {
     grid-template-columns: 1fr;
     gap: 0.6rem;
   }
@@ -1431,6 +1595,27 @@ main,
     font-size: 0.8rem;
     line-height: 1.5;
     opacity: 0.72;
+  }
+
+  .field-group input,
+  .field-group select,
+  .field-group textarea {
+    font-size: 16px;
+  }
+
+  .field-group input[type="file"] {
+    padding: 0.7rem;
+  }
+
+  .field-group input[type="file"]::file-selector-button {
+    width: 100%;
+    margin: 0 0 0.45rem;
+    display: block;
+    text-align: center;
+  }
+
+  .payment-qr-media {
+    max-width: 100%;
   }
 
   /* Number cards: horizontal layout */

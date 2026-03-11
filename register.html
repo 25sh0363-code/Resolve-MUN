@@ -56,12 +56,94 @@
         <p class="section-kicker">Delegate Registration</p>
         <h2>Register As Delegate</h2>
         <p class="section-intro">Complete your application and secure your committee preference. Position papers and delegate guides will be shared after confirmation.</p>
-        <div class="grid-2">
-          <article class="card"><h4>Step 1</h4><p>Submit delegate details and institution information.</p></article>
-          <article class="card"><h4>Step 2</h4><p>Select committee preferences and portfolio interests.</p></article>
-          <article class="card"><h4>Step 3</h4><p>Complete registration fee process based on the active tier.</p></article>
-          <article class="card"><h4>Step 4</h4><p>Receive confirmation, onboarding resources, and procedural rules.</p></article>
+        <div class="payment-qr-card card">
+          <h4>Scan QR For Payment</h4>
+          <p>Use this QR code to complete delegate payment first. Then upload payment screenshot/photo in the form below.</p>
+          <div class="payment-qr-media">
+            <img src="assets/images/Untitled.jpeg" alt="Resolve MUN payment QR code" loading="lazy" />
+          </div>
         </div>
+        <form id="delegate-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbyyfAHk7esd1pRGZc5mwpGzJVZZdqNYqw1Ai0LqqRiEV49rlIvx9OyieJhThKRs8wI/exec" novalidate>
+          <div class="form-grid">
+            <label class="field-group">
+              <span>Full Name *</span>
+              <input type="text" name="fullName" autocomplete="name" required maxlength="100" />
+            </label>
+            <label class="field-group">
+              <span>Email Address *</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="120" />
+            </label>
+            <label class="field-group">
+              <span>Phone Number *</span>
+              <input type="tel" name="phone" autocomplete="tel" required maxlength="30" />
+            </label>
+            <label class="field-group">
+              <span>Institution / School *</span>
+              <input type="text" name="institution" autocomplete="organization" required maxlength="120" />
+            </label>
+            <label class="field-group">
+              <span>City *</span>
+              <input type="text" name="city" autocomplete="address-level2" required maxlength="80" />
+            </label>
+            <label class="field-group">
+              <span>Country *</span>
+              <input type="text" name="country" autocomplete="country-name" required maxlength="80" />
+            </label>
+            <label class="field-group">
+              <span>Grade / Year *</span>
+              <input type="text" name="grade" required maxlength="30" />
+            </label>
+            <label class="field-group">
+              <span>MUN Experience *</span>
+              <select name="munExperience" required>
+                <option value="">Choose one</option>
+                <option value="First timer">First timer</option>
+                <option value="1-2 conferences">1-2 conferences</option>
+                <option value="3-5 conferences">3-5 conferences</option>
+                <option value="6+ conferences">6+ conferences</option>
+              </select>
+            </label>
+            <label class="field-group">
+              <span>Committee Preference 1 *</span>
+              <input type="text" name="committeePreference1" required maxlength="80" placeholder="e.g. UNSC" />
+            </label>
+            <label class="field-group">
+              <span>Committee Preference 2</span>
+              <input type="text" name="committeePreference2" maxlength="80" placeholder="e.g. DISEC" />
+            </label>
+            <label class="field-group">
+              <span>Portfolio Preference</span>
+              <input type="text" name="portfolioPreference" maxlength="120" placeholder="e.g. France" />
+            </label>
+            <label class="field-group">
+              <span>Payment Reference / UTR *</span>
+              <input type="text" name="paymentReference" required maxlength="80" placeholder="Transaction ID" />
+            </label>
+            <label class="field-group">
+              <span>Proof Of Payment *</span>
+              <input type="file" name="proofOfPayment" required accept="image/*,.pdf" capture="environment" />
+              <small class="field-help">Upload screenshot/photo directly from your phone gallery or camera (PDF also accepted).</small>
+            </label>
+            <label class="field-group field-group-full">
+              <span>Dietary / Accessibility Notes</span>
+              <textarea name="dietaryNotes" rows="3" maxlength="300" placeholder="Optional"></textarea>
+            </label>
+            <label class="field-group field-group-full">
+              <span>Medical Notes / Emergency Info</span>
+              <textarea name="medicalNotes" rows="3" maxlength="300" placeholder="Optional"></textarea>
+            </label>
+            <label class="field-group field-group-full consent-row">
+              <input type="checkbox" name="consent" required />
+              <span>I confirm the above information is accurate and consent to conference communication. *</span>
+            </label>
+            <input type="text" name="website" autocomplete="off" tabindex="-1" class="honeypot-field" aria-hidden="true" />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" data-submit-label="Submit Delegate Registration">Submit Delegate Registration</button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </section>
 
       <section class="section reveal" id="faculty">

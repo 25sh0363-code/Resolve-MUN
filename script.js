@@ -412,6 +412,167 @@ function setupEasterEggs() {
   }
 }
 
+function setFormStatus(statusNode, text, type) {
+  if (!statusNode) return;
+  statusNode.textContent = text;
+  statusNode.classList.remove("success", "error");
+  if (type) {
+    statusNode.classList.add(type);
+  }
+}
+
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      const base64 = result.includes(",") ? result.split(",")[1] : "";
+      if (!base64) {
+        reject(new Error("Could not process proof of payment file."));
+        return;
+      }
+      resolve(base64);
+    };
+    reader.onerror = () => reject(new Error("Could not read proof of payment file."));
+    reader.readAsDataURL(file);
+  });
+}
+
+function setupDelegateRegistration() {
+  const form = document.getElementById("delegate-registration-form");
+  if (!form) return;
+
+  const submitButton = form.querySelector("button[type='submit']");
+  const statusNode = form.querySelector("[data-form-status]");
+  const endpoint = (form.dataset.appscriptUrl || "").trim();
+  const defaultLabel = submitButton?.dataset.submitLabel || "Submit Delegate Registration";
+
+  if (!endpoint || endpoint.includes("PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE")) {
+    if (submitButton) submitButton.disabled = true;
+    setFormStatus(
+      statusNode,
+      "Connect the Google Apps Script URL in register.html to enable submissions.",
+      "error"
+    );
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      setFormStatus(statusNode, "Please complete all required fields.", "error");
+      return;
+    }
+
+    const formData = new FormData(form);
+    if ((formData.get("website") || "").toString().trim()) {
+      setFormStatus(statusNode, "Validation failed.", "error");
+      return;
+    }
+
+    const proofFile = formData.get("proofOfPayment");
+    if (!(proofFile instanceof File) || !proofFile.name) {
+      setFormStatus(statusNode, "Please upload proof of payment.", "error");
+      return;
+    }
+    if (proofFile.size > 12 * 1024 * 1024) {
+      setFormStatus(statusNode, "Proof of payment must be 12MB or less.", "error");
+      return;
+    }
+
+    const allowedFile =
+      proofFile.type.startsWith("image/") ||
+      proofFile.type === "application/pdf" ||
+      /\.(jpg|jpeg|png|webp|heic|pdf)$/i.test(proofFile.name);
+    if (!allowedFile) {
+      setFormStatus(statusNode, "Please upload an image screenshot/photo or PDF.", "error");
+      return;
+    }
+
+    let proofOfPaymentBase64 = "";
+    try {
+      proofOfPaymentBase64 = await readFileAsBase64(proofFile);
+    } catch (error) {
+      setFormStatus(statusNode, error?.message || "Could not process proof of payment file.", "error");
+      return;
+    }
+
+    const payload = {
+      fullName: (formData.get("fullName") || "").toString().trim(),
+      email: (formData.get("email") || "").toString().trim(),
+      phone: (formData.get("phone") || "").toString().trim(),
+      institution: (formData.get("institution") || "").toString().trim(),
+      city: (formData.get("city") || "").toString().trim(),
+      country: (formData.get("country") || "").toString().trim(),
+      grade: (formData.get("grade") || "").toString().trim(),
+      munExperience: (formData.get("munExperience") || "").toString().trim(),
+      committeePreference1: (formData.get("committeePreference1") || "").toString().trim(),
+      committeePreference2: (formData.get("committeePreference2") || "").toString().trim(),
+      portfolioPreference: (formData.get("portfolioPreference") || "").toString().trim(),
+      paymentReference: (formData.get("paymentReference") || "").toString().trim(),
+      dietaryNotes: (formData.get("dietaryNotes") || "").toString().trim(),
+      medicalNotes: (formData.get("medicalNotes") || "").toString().trim(),
+      proofOfPaymentFileName: proofFile.name,
+      proofOfPaymentMimeType: proofFile.type || "application/octet-stream",
+      proofOfPaymentBase64,
+      consent: formData.get("consent") === "on",
+      source: "website",
+      submittedAt: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+    };
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+    }
+    setFormStatus(statusNode, "Submitting registration...", null);
+
+    try {
+      const body = new URLSearchParams({
+        payload: JSON.stringify(payload),
+      });
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body,
+      });
+
+      const responseText = await response.text();
+      let responseData = {};
+      try {
+        responseData = responseText ? JSON.parse(responseText) : {};
+      } catch (_error) {
+        responseData = {};
+      }
+
+      if (!response.ok || responseData.status === "error") {
+        const message = responseData.message || "Registration failed. Please try again.";
+        throw new Error(message);
+      }
+
+      setFormStatus(
+        statusNode,
+        "Registration received. Check your email soon for confirmation from the organizing team.",
+        "success"
+      );
+      form.reset();
+    } catch (error) {
+      setFormStatus(
+        statusNode,
+        error?.message || "Could not submit registration right now. Please try again.",
+        "error"
+      );
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultLabel;
+      }
+    }
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────
 function init() {
   updateCountdown();
@@ -428,6 +589,7 @@ function init() {
   setupTypewriter();
   setupCountUp();
   setupEasterEggs();
+  setupDelegateRegistration();
 }
 
 if (document.readyState === "loading") {
