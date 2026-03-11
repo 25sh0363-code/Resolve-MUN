@@ -500,6 +500,7 @@ function setupDelegateRegistration() {
     }
 
     const payload = {
+      registrationType: "delegate",
       fullName: (formData.get("fullName") || "").toString().trim(),
       email: (formData.get("email") || "").toString().trim(),
       phone: (formData.get("phone") || "").toString().trim(),
@@ -573,6 +574,107 @@ function setupDelegateRegistration() {
   });
 }
 
+function setupOrganisingCommitteeRegistration() {
+  const form = document.getElementById("oc-registration-form");
+  if (!form) return;
+
+  const submitButton = form.querySelector("button[type='submit']");
+  const statusNode = form.querySelector("[data-form-status]");
+  const endpoint = (form.dataset.appscriptUrl || "").trim();
+  const defaultLabel = submitButton?.dataset.submitLabel || "Submit Organising Committee Application";
+
+  if (!endpoint || endpoint.includes("PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE")) {
+    if (submitButton) submitButton.disabled = true;
+    setFormStatus(
+      statusNode,
+      "Connect the Google Apps Script URL in register.html to enable submissions.",
+      "error"
+    );
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      setFormStatus(statusNode, "Please complete all required fields.", "error");
+      return;
+    }
+
+    const formData = new FormData(form);
+    if ((formData.get("website") || "").toString().trim()) {
+      setFormStatus(statusNode, "Validation failed.", "error");
+      return;
+    }
+
+    const payload = {
+      registrationType: "organisingCommittee",
+      fullName: (formData.get("fullName") || "").toString().trim(),
+      email: (formData.get("email") || "").toString().trim(),
+      phone: (formData.get("phone") || "").toString().trim(),
+      institution: (formData.get("institution") || "").toString().trim(),
+      grade: (formData.get("grade") || "").toString().trim(),
+      preferredTeam: (formData.get("preferredTeam") || "").toString().trim(),
+      relevantExperience: (formData.get("relevantExperience") || "").toString().trim(),
+      motivation: (formData.get("motivation") || "").toString().trim(),
+      availability: (formData.get("availability") || "").toString().trim(),
+      consent: formData.get("consent") === "on",
+      source: "website",
+      submittedAt: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+    };
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+    }
+    setFormStatus(statusNode, "Submitting application...", null);
+
+    try {
+      const body = new URLSearchParams({
+        payload: JSON.stringify(payload),
+      });
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body,
+      });
+
+      const responseText = await response.text();
+      let responseData = {};
+      try {
+        responseData = responseText ? JSON.parse(responseText) : {};
+      } catch (_error) {
+        responseData = {};
+      }
+
+      if (!response.ok || responseData.status === "error") {
+        const message = responseData.message || "Application failed. Please try again.";
+        throw new Error(message);
+      }
+
+      setFormStatus(
+        statusNode,
+        "Application received. The team will review your profile and reach out.",
+        "success"
+      );
+      form.reset();
+    } catch (error) {
+      setFormStatus(
+        statusNode,
+        error?.message || "Could not submit application right now. Please try again.",
+        "error"
+      );
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultLabel;
+      }
+    }
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────
 function init() {
   updateCountdown();
@@ -590,6 +692,7 @@ function init() {
   setupCountUp();
   setupEasterEggs();
   setupDelegateRegistration();
+  setupOrganisingCommitteeRegistration();
 }
 
 if (document.readyState === "loading") {

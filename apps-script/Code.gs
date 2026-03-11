@@ -1,7 +1,9 @@
-const SHEET_NAME = "Delegate Registrations";
+const DELEGATE_SHEET_NAME = "Delegate Registrations";
+const OC_SHEET_NAME = "Organising Committee Applications";
 const DRIVE_FOLDER_ID = "1wTVcRd7ULW7s9_v0-r9TmeRa4SKykEul";
-const HEADERS = [
+const DELEGATE_HEADERS = [
   "Timestamp",
+  "Registration Type",
   "Full Name",
   "Email",
   "Phone",
@@ -23,6 +25,24 @@ const HEADERS = [
   "User Agent",
 ];
 
+const OC_HEADERS = [
+  "Timestamp",
+  "Registration Type",
+  "Full Name",
+  "Email",
+  "Phone",
+  "Institution",
+  "Grade",
+  "Preferred Team",
+  "Relevant Experience",
+  "Motivation",
+  "Availability",
+  "Consent",
+  "Source",
+  "Submitted At",
+  "User Agent",
+];
+
 function doGet() {
   return jsonOutput({
     status: "ok",
@@ -33,32 +53,56 @@ function doGet() {
 function doPost(e) {
   try {
     const payload = extractPayload(e);
-    validatePayload(payload);
-    const proofUrl = saveProofOfPayment_(payload);
+    const registrationType = String(payload.registrationType || "delegate");
 
-    const sheet = getOrCreateSheet_();
-    sheet.appendRow([
-      new Date(),
-      payload.fullName,
-      payload.email,
-      payload.phone,
-      payload.institution,
-      payload.city,
-      payload.country,
-      payload.grade,
-      payload.munExperience,
-      payload.committeePreference1,
-      payload.committeePreference2 || "",
-      payload.portfolioPreference || "",
-      payload.paymentReference,
-      proofUrl,
-      payload.dietaryNotes || "",
-      payload.medicalNotes || "",
-      payload.consent === true,
-      payload.source || "website",
-      payload.submittedAt || "",
-      payload.userAgent || "",
-    ]);
+    if (registrationType === "organisingCommittee") {
+      validateOrganisingCommitteePayload(payload);
+      const ocSheet = getOrCreateSheet_(OC_SHEET_NAME, OC_HEADERS);
+      ocSheet.appendRow([
+        new Date(),
+        "organisingCommittee",
+        payload.fullName,
+        payload.email,
+        payload.phone,
+        payload.institution,
+        payload.grade,
+        payload.preferredTeam,
+        payload.relevantExperience,
+        payload.motivation,
+        payload.availability,
+        payload.consent === true,
+        payload.source || "website",
+        payload.submittedAt || "",
+        payload.userAgent || "",
+      ]);
+    } else {
+      validateDelegatePayload(payload);
+      const proofUrl = saveProofOfPayment_(payload);
+      const delegateSheet = getOrCreateSheet_(DELEGATE_SHEET_NAME, DELEGATE_HEADERS);
+      delegateSheet.appendRow([
+        new Date(),
+        "delegate",
+        payload.fullName,
+        payload.email,
+        payload.phone,
+        payload.institution,
+        payload.city,
+        payload.country,
+        payload.grade,
+        payload.munExperience,
+        payload.committeePreference1,
+        payload.committeePreference2 || "",
+        payload.portfolioPreference || "",
+        payload.paymentReference,
+        proofUrl,
+        payload.dietaryNotes || "",
+        payload.medicalNotes || "",
+        payload.consent === true,
+        payload.source || "website",
+        payload.submittedAt || "",
+        payload.userAgent || "",
+      ]);
+    }
 
     return jsonOutput({
       status: "success",
@@ -88,7 +132,7 @@ function extractPayload(e) {
   return payload;
 }
 
-function validatePayload(payload) {
+function validateDelegatePayload(payload) {
   const requiredFields = [
     "fullName",
     "email",
@@ -129,6 +173,35 @@ function validatePayload(payload) {
   }
 }
 
+function validateOrganisingCommitteePayload(payload) {
+  const requiredFields = [
+    "fullName",
+    "email",
+    "phone",
+    "institution",
+    "grade",
+    "preferredTeam",
+    "relevantExperience",
+    "motivation",
+    "availability",
+  ];
+
+  requiredFields.forEach(function (field) {
+    if (!payload[field] || String(payload[field]).trim() === "") {
+      throw new Error("Missing required field: " + field);
+    }
+  });
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(String(payload.email))) {
+    throw new Error("Invalid email address.");
+  }
+
+  if (payload.consent !== true) {
+    throw new Error("Consent is required.");
+  }
+}
+
 function saveProofOfPayment_(payload) {
   if (!DRIVE_FOLDER_ID || DRIVE_FOLDER_ID.includes("PASTE_GOOGLE_DRIVE_FOLDER_ID_HERE")) {
     throw new Error("Server is missing Google Drive folder configuration.");
@@ -147,16 +220,16 @@ function saveProofOfPayment_(payload) {
   return createdFile.getUrl();
 }
 
-function getOrCreateSheet_() {
+function getOrCreateSheet_(sheetName, headers) {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = spreadsheet.getSheetByName(SHEET_NAME);
+  let sheet = spreadsheet.getSheetByName(sheetName);
 
   if (!sheet) {
-    sheet = spreadsheet.insertSheet(SHEET_NAME);
+    sheet = spreadsheet.insertSheet(sheetName);
   }
 
   if (sheet.getLastRow() === 0) {
-    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.setFrozenRows(1);
   }
 

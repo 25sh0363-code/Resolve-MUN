@@ -10,11 +10,13 @@ Currently live at: https://25sh0363-code.github.io/Resolve-MUN/
 - `committees.html` - all 8 committees and topic placeholders
 - `secretariat.html` - leadership structure placeholders
 - `venue.html` - venue reveal content and preview visuals
-- `register.html` - delegate/faculty registration flow overview
+- `register.html` - delegate and organising committee registration flow
 
 ## Delegate Registration System (Google Sheets + Apps Script)
 
 The website now includes a live delegate registration form in `register.html`.
+
+It also includes an Organising Committee application form for evaluation and consideration (no payment required).
 
 - Frontend form posts to an Apps Script Web App URL.
 - Apps Script writes each submission to a Google Sheet tab named `Delegate Registrations`.

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register | Resolve MUN 2026</title>
-    <meta name="description" content="Register for Resolve MUN 2026 as delegate or faculty advisor." />
+    <meta name="description" content="Register for Resolve MUN 2026 as delegate or organising committee." />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -48,7 +48,7 @@
 
         <div class="hero-actions" style="margin-top: 1.1rem;">
           <a class="btn btn-primary" href="#delegate">Register As Delegate</a>
-          <a class="btn btn-secondary" href="#faculty">Faculty Advisor Registration</a>
+          <a class="btn btn-secondary" href="#organising">Organising Committee Application</a>
         </div>
       </section>
 
@@ -63,7 +63,7 @@
             <img src="assets/images/Untitled.jpeg" alt="Resolve MUN payment QR code" loading="lazy" />
           </div>
         </div>
-        <form id="delegate-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbyyfAHk7esd1pRGZc5mwpGzJVZZdqNYqw1Ai0LqqRiEV49rlIvx9OyieJhThKRs8wI/exec" novalidate>
+        <form id="delegate-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbwZIVAPnXerqfiW-9lNQsXRIpo8ZA6bXW52UUrcTBWNm2M92796Jp2-2gmCOJW4uI5c/exec" novalidate>
           <div class="form-grid">
             <label class="field-group">
               <span>Full Name *</span>
@@ -146,10 +146,68 @@
         </form>
       </section>
 
-      <section class="section reveal" id="faculty">
-        <p class="section-kicker">Faculty Advisor</p>
-        <h2>Faculty Advisor Registration</h2>
-        <p class="section-intro">Faculty advisors can register delegations, coordinate institutional requirements, and receive logistics support directly from the organizing team.</p>
+      <section class="section reveal" id="organising">
+        <p class="section-kicker">Organising Committee</p>
+        <h2>Organising Committee Application</h2>
+        <p class="section-intro">Apply to join the Organising Committee. This form is for evaluation and consideration only, and does not require payment.</p>
+        <form id="oc-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbwZIVAPnXerqfiW-9lNQsXRIpo8ZA6bXW52UUrcTBWNm2M92796Jp2-2gmCOJW4uI5c/exec" novalidate>
+          <div class="form-grid">
+            <label class="field-group">
+              <span>Full Name *</span>
+              <input type="text" name="fullName" autocomplete="name" required maxlength="100" />
+            </label>
+            <label class="field-group">
+              <span>Email Address *</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="120" />
+            </label>
+            <label class="field-group">
+              <span>Phone Number *</span>
+              <input type="tel" name="phone" autocomplete="tel" required maxlength="30" />
+            </label>
+            <label class="field-group">
+              <span>Institution / School / College *</span>
+              <input type="text" name="institution" autocomplete="organization" required maxlength="120" />
+            </label>
+            <label class="field-group">
+              <span>Current Grade / Year *</span>
+              <input type="text" name="grade" required maxlength="30" />
+            </label>
+            <label class="field-group">
+              <span>Preferred Team *</span>
+              <select name="preferredTeam" required>
+                <option value="">Choose one</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Delegate Affairs">Delegate Affairs</option>
+                <option value="Media">Media</option>
+                <option value="Design">Design</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value="Executive Support">Executive Support</option>
+              </select>
+            </label>
+            <label class="field-group field-group-full">
+              <span>Relevant Experience *</span>
+              <textarea name="relevantExperience" rows="4" required maxlength="600" placeholder="Mention events, responsibilities, leadership or technical work."></textarea>
+            </label>
+            <label class="field-group field-group-full">
+              <span>Why Should We Select You? *</span>
+              <textarea name="motivation" rows="4" required maxlength="700" placeholder="Share your motivation and value you can add."></textarea>
+            </label>
+            <label class="field-group field-group-full">
+              <span>Availability During Conference Days *</span>
+              <textarea name="availability" rows="3" required maxlength="300" placeholder="Mention your availability and any constraints."></textarea>
+            </label>
+            <label class="field-group field-group-full consent-row">
+              <input type="checkbox" name="consent" required />
+              <span>I confirm the information provided is accurate and I agree to be contacted for organising committee evaluation. *</span>
+            </label>
+            <input type="text" name="website" autocomplete="off" tabindex="-1" class="honeypot-field" aria-hidden="true" />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" data-submit-label="Submit Organising Committee Application">Submit Organising Committee Application</button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </section>
     </main>
 
