@@ -73,13 +73,13 @@
         const status = document.getElementById('waitlist-status');
         status.textContent = '';
         if (!email) { status.textContent = 'Please enter your email.'; return; }
-        const res = await fetch('https://script.google.com/macros/s/AKfycbzsm_yih2ybQCYNmBl__Qx8mCELw7jDva9ztfjSZj6TtliJ7fh-LWh9FrEXWbN0-zgM/exec', {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzhZzmGDmcpPkQmtrTW3cBU2ifdLp6dkP41x9i_5E2lx5652D88tgBDT0cJXV1vDg0KTQ/exec', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ registrationType: 'waitlist', email })
         });
         if (res.ok) {
-          status.textContent = 'You have been added to the waitlist!';
+          status.textContent = 'Your email has been added to the waitlist!';
           this.reset();
         } else {
           status.textContent = 'There was an error. Please try again.';

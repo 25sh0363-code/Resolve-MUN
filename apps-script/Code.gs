@@ -124,18 +124,21 @@ function doPost(e) {
 }
 
 function extractPayload(e) {
-  const payloadText = e && e.parameter ? e.parameter.payload : "";
-  if (!payloadText) {
+  // Accept both JSON body and URL-encoded form
+  let payload = {};
+  if (e && e.postData && e.postData.type === 'application/json') {
+    try {
+      payload = JSON.parse(e.postData.contents);
+    } catch (_error) {
+      throw new Error("Invalid JSON payload.");
+    }
+  } else if (e && e.parameter) {
+    Object.keys(e.parameter).forEach(function(key) {
+      payload[key] = e.parameter[key];
+    });
+  } else {
     throw new Error("Missing payload.");
   }
-
-  let payload = {};
-  try {
-    payload = JSON.parse(payloadText);
-  } catch (_error) {
-    throw new Error("Invalid JSON payload.");
-  }
-
   return payload;
 }
 
