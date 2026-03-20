@@ -221,7 +221,7 @@ main,
   align-items: center;
   gap: 0.65rem;
   text-decoration: none;
-  font-family: var(--font-bebas);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-size: 1.05rem;
   color: var(--text-main);
