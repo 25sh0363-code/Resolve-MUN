@@ -553,9 +553,9 @@ main,
   color: var(--text-soft);
 }
 
-.hero-visual {
   display: grid;
   gap: 0.8rem;
+  justify-items: center;
 }
 
 .holo-card {
