@@ -1,4 +1,56 @@
 @media (max-width: 600px) {
+  .sg-letter-section {
+    padding: 1.2rem 0.7rem !important;
+    border-radius: 14px !important;
+    max-width: 98vw !important;
+    margin: 1.2rem auto 0 auto !important;
+    box-shadow: 0 1px 12px 0 rgba(60,0,80,0.10) !important;
+  }
+  .sg-letter-section h1 {
+    font-size: 2.1rem !important;
+    word-break: break-word !important;
+    padding: 0 0.1em !important;
+    margin-bottom: 1.1rem !important;
+  }
+  .sg-letter-section blockquote {
+    font-size: 1rem !important;
+    padding: 0 0.7rem !important;
+    margin-bottom: 1.2rem !important;
+  }
+  .sg-letter {
+    font-size: 0.98rem !important;
+    line-height: 1.6 !important;
+    word-break: break-word !important;
+    padding: 0 0.1em !important;
+  }
+  .sg-letter-section .section-kicker {
+    font-size: 0.7rem !important;
+    padding: 0 0.1em !important;
+  }
+  .sg-letter-section div[style*="margin-top: 2.8rem"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.7rem !important;
+    margin-top: 1.5rem !important;
+  }
+  .sg-letter-section div[style*="width:54px"] {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.1rem !important;
+  }
+  .sg-letter-section div[style*="font-weight: bold"] {
+    font-size: 1rem !important;
+  }
+  .sg-letter-section div[style*="font-size: 1.01rem"] {
+    font-size: 0.92rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .holo-card {
+    display: none !important;
+  }
+}
+@media (max-width: 600px) {
   /* Countdown box: tighter, more readable, less border radius */
   .countdown-wrap {
     padding: 0.7rem 0.5rem !important;
@@ -502,6 +554,9 @@ main,
   margin-top: 1rem;
   border-top: 1px solid var(--line);
   padding-top: 1rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .countdown-head {
@@ -590,7 +645,8 @@ main,
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 2rem;
+  max-width: 480px;
+  margin: 1.2rem auto 0 auto;
 }
 
 .holo-card::before {
@@ -652,17 +708,18 @@ main,
   animation: globeSpin 13s linear infinite;
 }
   /* Venue image wide and responsive */
-  .section img[alt="Venue"] {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-    margin: 1.5rem 0 1.5rem 0;
-    border-radius: 1.2rem;
-    object-fit: cover;
-    max-height: 340px;
-  }
+.section img[alt="Venue"] {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  margin: 1.5rem 0 1.5rem 0;
+  border-radius: 1.2rem;
+  object-fit: cover;
+  max-height: 340px;
   top: 30%;
 }
+  
+
 
 .holo-ping.b {
   right: 20%;
