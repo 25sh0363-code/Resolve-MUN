@@ -73,7 +73,7 @@
         const status = document.getElementById('waitlist-status');
         status.textContent = '';
         if (!email) { status.textContent = 'Please enter your email.'; return; }
-        const res = await fetch('https://script.google.com/macros/s/AKfycbzhZzmGDmcpPkQmtrTW3cBU2ifdLp6dkP41x9i_5E2lx5652D88tgBDT0cJXV1vDg0KTQ/exec', {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzXoywrjq8kLbTxegMHdiCpgJN5cod4zFJ7Oa5X_xwy5AdSWAuHcj1utQ1JYxw95pzNXg/exec', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ registrationType: 'waitlist', email })
@@ -187,7 +187,7 @@
         <p class="section-kicker">Organising Committee</p>
         <h2>Organising Committee Application</h2>
         <p class="section-intro">Apply to join the Organising Committee. This form is for evaluation and consideration only, and does not require payment.</p>
-        <form id="oc-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbwZIVAPnXerqfiW-9lNQsXRIpo8ZA6bXW52UUrcTBWNm2M92796Jp2-2gmCOJW4uI5c/exec" novalidate>
+        <form id="oc-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbzXoywrjq8kLbTxegMHdiCpgJN5cod4zFJ7Oa5X_xwy5AdSWAuHcj1utQ1JYxw95pzNXg/exec" novalidate>
           <div class="form-grid">
             <label class="field-group">
               <span>Full Name *</span>
