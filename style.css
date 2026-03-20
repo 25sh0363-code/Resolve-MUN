@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
 :root {
-  --bg-0: #0a0710;
-  --bg-1: #100c1a;
-  --bg-2: #18122a;
+  --bg-0: #12001a;
+  --bg-1: #1a0824;
+  --bg-2: #210c2e;
   --purple-bright: #c084fc;
-  --purple-mid:    #9b72f5;
+  --purple-mid:    #a259f7;
   --purple-deep:   #6d28d9;
   --rose:          #e879a8;
   --lavender:      #bba8f5;
-  --line:          rgba(155, 114, 245, 0.18);
-  --line-strong:   rgba(192, 132, 252, 0.38);
-  --text-main:  #f0eafa;
-  --text-soft:  #b8a8d8;
-  --text-muted: #7b6a9e;
+  --line:          rgba(162, 89, 247, 0.22);
+  --line-strong:   rgba(192, 132, 252, 0.45);
+  --text-main:  #e9d6fa;
+  --text-soft:  #c7a8e5;
+  --text-muted: #a084c7;
   --font-logo: "Cormorant Garamond", Georgia, serif;
   --font-nav: "Cormorant Garamond", Georgia, serif;
   --font-display: 'Bebas Neue', Arial, sans-serif;
@@ -43,10 +43,10 @@ body {
   line-height: 1.6;
   color: var(--text-main);
   background:
-    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(109, 40, 217, 0.28), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 90% 15%,  rgba(192, 132, 252, 0.12), transparent 50%),
-    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(109, 40, 217, 0.18), transparent 55%),
-    linear-gradient(160deg, var(--bg-0) 0%, #0e0b1e 55%, #150f28 100%);
+    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(162, 89, 247, 0.32), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 15%,  rgba(192, 132, 252, 0.18), transparent 50%),
+    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(109, 40, 217, 0.22), transparent 55%),
+    linear-gradient(160deg, var(--bg-0) 0%, #1a0824 55%, #210c2e 100%);
   overflow-x: hidden;
 }
 
