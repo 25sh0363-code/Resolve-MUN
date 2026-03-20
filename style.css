@@ -14,8 +14,10 @@
   --text-main:  #f0eafa;
   --text-soft:  #b8a8d8;
   --text-muted: #7b6a9e;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-logo: "Cormorant Garamond", Georgia, serif;
+  --font-nav: "Cormorant Garamond", Georgia, serif;
+  --font-display: 'Bebas Neue', Arial, sans-serif;
+  --font-body: 'Oswald', Arial, sans-serif;
   --max-width: 1160px;
 }
 
