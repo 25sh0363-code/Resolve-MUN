@@ -552,10 +552,28 @@ main,
   letter-spacing: 0.08em;
   color: var(--text-soft);
 }
-
+.hero-visual {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
-  justify-items: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-visual > .holo-card {
+    display: none;
+  }
 }
 
 .holo-card {
@@ -1325,7 +1343,44 @@ main,
     border-top: none;
     margin-top: 0;
     padding-top: 0;
+    text-align: center;
+    border: 1px solid rgba(192, 132, 252, 0.22);
+    border-radius: 24px;
+    padding: 1.5rem 1.2rem;
+    background: rgba(14, 8, 32, 0.82);
+    box-shadow: 0 2px 18px 0 rgba(60,0,80,0.10);
+    margin-bottom: 1.2rem;
   }
+/* Secretary General's Letter Desktop Styles */
+@media (min-width: 900px) {
+  .sg-letter-section {
+    max-width: 700px;
+    margin: 2.5rem auto 0 auto !important;
+    background: var(--bg-2);
+    border-radius: 18px;
+    box-shadow: 0 2px 24px 0 rgba(60,0,80,0.10);
+    padding: 2.6rem 2.4rem !important;
+    border: 1.5px solid var(--line-strong);
+  }
+  .sg-letter-section .title-lg {
+    font-size: 2.2rem;
+    color: var(--purple-bright);
+    margin-bottom: 1.3rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  .sg-letter {
+    font-size: 1.13rem;
+    color: var(--text-main);
+    line-height: 1.7;
+  }
+  .sg-letter-section .section-kicker {
+    font-size: 1.01rem;
+    color: var(--text-muted);
+    letter-spacing: 0.13em;
+    margin-bottom: 0.7rem;
+  }
+}
 }
 
 @media (max-width: 760px) {
