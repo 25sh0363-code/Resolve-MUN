@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
 :root {
-  --bg-0: #12001a;
-  --bg-1: #1a0824;
-  --bg-2: #210c2e;
-  --purple-bright: #c084fc;
-  --purple-mid:    #a259f7;
-  --purple-deep:   #6d28d9;
-  --rose:          #e879a8;
-  --lavender:      #bba8f5;
-  --line:          rgba(162, 89, 247, 0.22);
-  --line-strong:   rgba(192, 132, 252, 0.45);
-  --text-main:  #e9d6fa;
-  --text-soft:  #c7a8e5;
-  --text-muted: #a084c7;
+  --bg-0: #0a0613;
+  --bg-1: #12082a;
+  --bg-2: #1a0e3a;
+  --purple-bright: #a259f7;
+  --purple-mid:    #7c3aed;
+  --purple-deep:   #4c1d95;
+  --rose:          #7c3aed;
+  --lavender:      #c4b5fd;
+  --line:          rgba(124, 58, 237, 0.28);
+  --line-strong:   rgba(124, 58, 237, 0.55);
+  --text-main:  #f5f3ff;
+  --text-soft:  #c4b5fd;
+  --text-muted: #a78bfa;
   --font-logo: "Cormorant Garamond", Georgia, serif;
   --font-nav: "Cormorant Garamond", Georgia, serif;
   --font-display: 'Bebas Neue', Arial, sans-serif;
@@ -43,10 +43,10 @@ body {
   line-height: 1.6;
   color: var(--text-main);
   background:
-    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(162, 89, 247, 0.32), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 90% 15%,  rgba(192, 132, 252, 0.18), transparent 50%),
-    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(109, 40, 217, 0.22), transparent 55%),
-    linear-gradient(160deg, var(--bg-0) 0%, #1a0824 55%, #210c2e 100%);
+    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(124, 58, 237, 0.38), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 15%,  rgba(124, 58, 237, 0.22), transparent 50%),
+    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(76, 29, 149, 0.22), transparent 55%),
+    linear-gradient(160deg, var(--bg-0) 0%, #12082a 55%, #1a0e3a 100%);
   overflow-x: hidden;
 }
 
