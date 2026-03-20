@@ -66,25 +66,38 @@
         </form>
         <p id="waitlist-status" style="margin: 0.5rem 0 0; color: var(--purple-bright); font-size: 0.98rem;"></p>
       </section>
+
       <script>
-      document.getElementById('waitlist-form').onsubmit = async function(e) {
-        e.preventDefault();
-        const email = this.email.value.trim();
-        const status = document.getElementById('waitlist-status');
-        status.textContent = '';
-        if (!email) { status.textContent = 'Please enter your email.'; return; }
-        const res = await fetch('https://script.google.com/macros/s/AKfycbzXoywrjq8kLbTxegMHdiCpgJN5cod4zFJ7Oa5X_xwy5AdSWAuHcj1utQ1JYxw95pzNXg/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ registrationType: 'waitlist', email })
-        });
-        if (res.ok) {
-          status.textContent = 'Your email has been added to the waitlist!';
-          this.reset();
-        } else {
-          status.textContent = 'There was an error. Please try again.';
-        }
-      };
+        document.getElementById('waitlist-form').onsubmit = async function(e) {
+          e.preventDefault();
+          const email = this.email.value.trim();
+          const status = document.getElementById('waitlist-status');
+          const btn = this.querySelector('button[type="submit"]');
+          status.textContent = '';
+          if (!email) { status.textContent = 'Please enter your email.'; return; }
+
+          btn.disabled = true;
+          btn.textContent = 'Submitting…';
+
+          try {
+            await fetch('https://script.google.com/macros/s/AKfycbzl9WaJhSGkf_OmLyLu0q_9vjQKGRANOQpGcqWu7guVg6t9qFF_9a6PVovowKnNZoYoTQ/exec', {
+              method: 'POST',
+              mode: 'no-cors',          // avoids CORS preflight — response will be opaque
+              headers: { 'Content-Type': 'text/plain' },  // text/plain is a "simple" header, no preflight
+              body: JSON.stringify({ registrationType: 'waitlist', email })
+            });
+            // With no-cors, response is always opaque — if fetch didn't throw, it reached the server
+            status.style.color = 'var(--purple-bright)';
+            status.textContent = 'Your email has been added to the waitlist!';
+            this.reset();
+          } catch (err) {
+            status.style.color = '#e05';
+            status.textContent = 'There was an error. Please try again.';
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Join Waitlist';
+          }
+        };
       </script>
 
       <!-- '''
@@ -187,7 +200,7 @@
         <p class="section-kicker">Organising Committee</p>
         <h2>Organising Committee Application</h2>
         <p class="section-intro">Apply to join the Organising Committee. This form is for evaluation and consideration only, and does not require payment.</p>
-        <form id="oc-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbzXoywrjq8kLbTxegMHdiCpgJN5cod4zFJ7Oa5X_xwy5AdSWAuHcj1utQ1JYxw95pzNXg/exec" novalidate>
+        <form id="oc-registration-form" class="registration-form" data-appscript-url="https://script.google.com/macros/s/AKfycbzl9WaJhSGkf_OmLyLu0q_9vjQKGRANOQpGcqWu7guVg6t9qFF_9a6PVovowKnNZoYoTQ/exec" novalidate>
           <div class="form-grid">
             <label class="field-group">
               <span>Full Name *</span>
