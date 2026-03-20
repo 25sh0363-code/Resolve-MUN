@@ -391,16 +391,14 @@ function setupEasterEggs() {
   let tapCount = 0, tapTimer = null;
   const brand = document.querySelector(".brand");
   if (brand) {
-    // Use touchstart for instant response on mobile (no 300ms delay)
     brand.addEventListener("touchstart", (e) => {
-      e.preventDefault(); // stop navigation + stop the ghost click
+      e.preventDefault();
       tapCount++;
       clearTimeout(tapTimer);
       tapTimer = setTimeout(() => { tapCount = 0; }, 1800);
       if (tapCount === 3) { showSecretPopup(); tapCount = 0; }
     }, { passive: false });
 
-    // Desktop fallback: 7 clicks
     brand.addEventListener("click", (e) => {
       if (window.matchMedia("(pointer: coarse)").matches) { e.preventDefault(); return; }
       e.preventDefault();
@@ -436,6 +434,20 @@ function readFileAsBase64(file) {
     reader.onerror = () => reject(new Error("Could not read proof of payment file."));
     reader.readAsDataURL(file);
   });
+}
+
+// ── Shared: post JSON to Apps Script via no-cors ──────────────
+// Uses text/plain + no-cors so the browser never sends a CORS preflight,
+// which Google Apps Script cannot handle. The body is still valid JSON;
+// Code.gs parses e.postData.contents regardless of content-type.
+async function postToAppsScript(endpoint, payload) {
+  await fetch(endpoint, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify(payload),
+  });
+  // no-cors gives an opaque response (status 0) — if fetch didn't throw, data reached the server.
 }
 
 function setupDelegateRegistration() {
@@ -531,28 +543,7 @@ function setupDelegateRegistration() {
     setFormStatus(statusNode, "Submitting registration...", null);
 
     try {
-      const body = new URLSearchParams({
-        payload: JSON.stringify(payload),
-      });
-
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body,
-      });
-
-      const responseText = await response.text();
-      let responseData = {};
-      try {
-        responseData = responseText ? JSON.parse(responseText) : {};
-      } catch (_error) {
-        responseData = {};
-      }
-
-      if (!response.ok || responseData.status === "error") {
-        const message = responseData.message || "Registration failed. Please try again.";
-        throw new Error(message);
-      }
-
+      await postToAppsScript(endpoint, payload);
       setFormStatus(
         statusNode,
         "Registration received. Check your email soon for confirmation from the organizing team.",
@@ -632,28 +623,7 @@ function setupOrganisingCommitteeRegistration() {
     setFormStatus(statusNode, "Submitting application...", null);
 
     try {
-      const body = new URLSearchParams({
-        payload: JSON.stringify(payload),
-      });
-
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body,
-      });
-
-      const responseText = await response.text();
-      let responseData = {};
-      try {
-        responseData = responseText ? JSON.parse(responseText) : {};
-      } catch (_error) {
-        responseData = {};
-      }
-
-      if (!response.ok || responseData.status === "error") {
-        const message = responseData.message || "Application failed. Please try again.";
-        throw new Error(message);
-      }
-
+      await postToAppsScript(endpoint, payload);
       setFormStatus(
         statusNode,
         "Application received. The team will review your profile and reach out.",
