@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
 
 :root {
   --bg-0: #0a0710;
@@ -14,10 +14,9 @@
   --text-main:  #f0eafa;
   --text-soft:  #b8a8d8;
   --text-muted: #7b6a9e;
+  --font-logo: "Cormorant Garamond", Georgia, serif;
   --font-display: 'Bebas Neue', Arial, sans-serif;
   --font-body:    'Oswald', Arial, sans-serif;
-  --font-oswald:   'Oswald', Arial, sans-serif;
-  --font-bebas:    'Bebas Neue', Arial, sans-serif;
   --max-width: 1160px;
 }
 
@@ -221,7 +220,7 @@ main,
   align-items: center;
   gap: 0.65rem;
   text-decoration: none;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-logo);
   font-style: italic;
   font-size: 1.05rem;
   color: var(--text-main);
