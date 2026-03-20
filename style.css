@@ -1,3 +1,53 @@
+@media (max-width: 600px) {
+  /* Countdown box: tighter, more readable, less border radius */
+  .countdown-wrap {
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 14px !important;
+    margin-bottom: 1.2rem !important;
+  }
+  .countdown-grid {
+    gap: 0.22rem !important;
+  }
+  .time-box {
+    padding: 0.55rem 0.08rem !important;
+    border-radius: 9px !important;
+  }
+  .time-box span {
+    font-size: 1.15rem !important;
+  }
+  .time-box small {
+    font-size: 0.38rem !important;
+  }
+  .countdown-summary {
+    font-size: 0.6rem !important;
+    margin-top: 0.4rem !important;
+  }
+
+  /* Waitlist form: stack input and button vertically, full width, better spacing */
+  #waitlist-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.6rem !important;
+    max-width: 100% !important;
+  }
+  #waitlist-form input[type="email"] {
+    width: 100% !important;
+    font-size: 1rem !important;
+    min-width: 0 !important;
+  }
+  #waitlist-form button {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 0.2rem !important;
+    font-size: 1rem !important;
+    border-radius: 999px !important;
+    padding: 1.1rem 0.5rem !important;
+  }
+  #waitlist-status {
+    text-align: center !important;
+    font-size: 0.98rem !important;
+  }
+}
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
 :root {
