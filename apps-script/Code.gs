@@ -43,6 +43,9 @@ const OC_HEADERS = [
   "User Agent",
 ];
 
+const WAITLIST_SHEET_NAME = "Delegate Waitlist";
+const WAITLIST_HEADERS = ["Timestamp", "Email"];
+
 function doGet() {
   return jsonOutput({
     status: "ok",
@@ -55,6 +58,10 @@ function doPost(e) {
     const payload = extractPayload(e);
     const registrationType = String(payload.registrationType || "delegate");
 
+    if (registrationType === "waitlist") {
+      handleWaitlist(payload);
+      return jsonOutput({ status: "ok", message: "Added to waitlist." });
+    }
     if (registrationType === "organisingCommittee") {
       validateOrganisingCommitteePayload(payload);
       const ocSheet = getOrCreateSheet_(OC_SHEET_NAME, OC_HEADERS);
@@ -220,20 +227,22 @@ function saveProofOfPayment_(payload) {
   return createdFile.getUrl();
 }
 
-function getOrCreateSheet_(sheetName, headers) {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = spreadsheet.getSheetByName(sheetName);
-
+function getOrCreateSheet_(name, headers) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName(name);
   if (!sheet) {
-    sheet = spreadsheet.insertSheet(sheetName);
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
   }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    sheet.setFrozenRows(1);
-  }
-
   return sheet;
+}
+
+function handleWaitlist(payload) {
+  if (!payload.email || !/^\S+@\S+\.\S+$/.test(payload.email)) {
+    throw new Error("A valid email is required for the waitlist.");
+  }
+  const sheet = getOrCreateSheet_(WAITLIST_SHEET_NAME, WAITLIST_HEADERS);
+  sheet.appendRow([new Date(), payload.email]);
 }
 
 function jsonOutput(data) {

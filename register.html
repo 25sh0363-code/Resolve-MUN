@@ -52,6 +52,41 @@
         </div>
       </section>
 
+      <section class="section reveal" id="waitlist" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 1.2rem;">
+          <h3 style="margin: 0; font-size: 1.25rem; color: var(--purple-bright); font-family: var(--font-display);">Delegate Waitlist</h3>
+          <span style="font-size: 0.95rem; color: var(--text-soft);">(Get notified if spots open up!)</span>
+        </div>
+        <form id="waitlist-form" style="margin-top: 0.7rem; max-width: 340px; display: flex; gap: 0.5rem; align-items: flex-end;">
+          <label style="flex: 1; display: flex; flex-direction: column; gap: 0.2rem;">
+            <span style="font-size: 0.9rem; color: var(--text-muted);">Email Address</span>
+            <input type="email" name="email" required maxlength="120" placeholder="your@email.com" style="padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text-main); font-size: 1rem;" />
+          </label>
+          <button type="submit" class="btn btn-primary" style="min-width: 110px;">Join Waitlist</button>
+        </form>
+        <p id="waitlist-status" style="margin: 0.5rem 0 0; color: var(--purple-bright); font-size: 0.98rem;"></p>
+      </section>
+      <script>
+      document.getElementById('waitlist-form').onsubmit = async function(e) {
+        e.preventDefault();
+        const email = this.email.value.trim();
+        const status = document.getElementById('waitlist-status');
+        status.textContent = '';
+        if (!email) { status.textContent = 'Please enter your email.'; return; }
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzsm_yih2ybQCYNmBl__Qx8mCELw7jDva9ztfjSZj6TtliJ7fh-LWh9FrEXWbN0-zgM/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ registrationType: 'waitlist', email })
+        });
+        if (res.ok) {
+          status.textContent = 'You have been added to the waitlist!';
+          this.reset();
+        } else {
+          status.textContent = 'There was an error. Please try again.';
+        }
+      };
+      </script>
+
       <!-- '''
       <section class="section reveal" id="delegate">
         <p class="section-kicker">Delegate Registration</p>
@@ -146,7 +181,7 @@
           </div>
         </form>
       </section>
-      <!-- ''' -->
+      ''' -->
 
       <section class="section reveal" id="organising">
         <p class="section-kicker">Organising Committee</p>
