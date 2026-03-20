@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
 :root {
   --bg-0: #0a0710;
@@ -14,9 +14,8 @@
   --text-main:  #f0eafa;
   --text-soft:  #b8a8d8;
   --text-muted: #7b6a9e;
-  --font-logo: "Cormorant Garamond", Georgia, serif;
-  --font-display: 'Bebas Neue', Arial, sans-serif;
-  --font-body:    'Oswald', Arial, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
   --max-width: 1160px;
 }
 
@@ -220,7 +219,7 @@ main,
   align-items: center;
   gap: 0.65rem;
   text-decoration: none;
-  font-family: var(--font-logo);
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.05rem;
   color: var(--text-main);
@@ -258,8 +257,7 @@ main,
 
 .nav-links a {
   text-decoration: none;
-  font-family: var(--font-bebas);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-soft);
@@ -346,7 +344,7 @@ main,
 .hero h1,
 .title-xl {
   margin: 0.8rem 0 0;
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -397,7 +395,7 @@ main,
 
 .metric strong {
   display: block;
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.5rem;
   font-weight: 600;
@@ -479,7 +477,7 @@ main,
 
 .time-box span {
   display: block;
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.5rem;
   font-weight: 600;
@@ -645,7 +643,7 @@ main,
 }
 
 .cell strong {
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;
   font-size: clamp(1.3rem, 2.8vw, 1.9rem);
@@ -672,7 +670,7 @@ main,
 
 .section h2,
 .section h3 {
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -718,7 +716,7 @@ main,
 }
 
 .number-card .num {
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   color: var(--purple-bright);
   font-size: 1.2rem;
@@ -1254,17 +1252,17 @@ main,
     border-bottom: 1px solid var(--line);
   }
 
-  
+  /* Remove right border from even cells in 2-col layout */
   .stats-ribbon .cell:nth-child(even) {
     border-right: 0;
-   }
+  }
 
-  
+  /* Remove bottom border from last row cells */
   .stats-ribbon .cell:nth-last-child(-n+2) {
     border-bottom: 0;
   }
 
-  
+  /* Hero visual: countdown full-width, holo-cards side by side */
   .hero-visual {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.7rem;
@@ -1279,11 +1277,14 @@ main,
 }
 
 @media (max-width: 760px) {
-  
+  /* ══════════════════════════════════════
+     MOBILE WEB APP — native app aesthetic
+     Desktop styles untouched above 760px
+  ══════════════════════════════════════ */
 
   :root { --max-width: 100%; }
 
-  
+  /* ── Bottom nav ── */
   .mob-nav { display: flex !important; }
 
   body {
@@ -1291,7 +1292,7 @@ main,
     overflow-x: hidden;
   }
 
-  
+  /* ── Header: transparent splash → blur on scroll ── */
   .menu-btn   { display: none; }
   .header-cta { display: none; }
   .nav-links  { display: none !important; }
@@ -1799,7 +1800,7 @@ main,
 }
 
 .sdp-title {
-  font-family: var(--font-bebas);
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 2rem;
   font-weight: 700;
