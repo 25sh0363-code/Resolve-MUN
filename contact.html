@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Resolve MUN 2026</title>
+    <meta name="description" content="Contact the Resolve MUN 2026 team for queries, partnerships, and support." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="Resolve MUN Home">
+          <img src="assets/images/logo.png" alt="Resolve MUN Logo" style="height:32px;width:auto;margin-right:0.35rem;vertical-align:middle;box-shadow:0 2px 12px rgba(124,58,237,0.10);object-fit:contain;" />
+          <span class="brand-text">RESOLVE MUN<span class="brand-sub">Resolve. Reform. Reconcile.</span></span>
+        </a>
+        <button class="menu-btn" data-menu-toggle aria-expanded="false" aria-label="Toggle menu">Menu</button>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="committees.html">Committees</a>
+          <a href="venue.html">Venue</a>
+          <a href="contact.html" class="active">Contact Us</a>
+          <a href="register.html">Register Now</a>
+        </nav>
+        <a class="header-cta" href="register.html">Register Now</a>
+      </div>
+    </header>
+    <main>
+      <section class="hero-panel reveal" style="max-width: 540px; margin: 2.5rem auto 2rem auto;">
+        <p class="badge">Contact Us</p>
+        <h1>Get In Touch</h1>
+        <p class="section-intro">Have a question, partnership inquiry, or need support? Fill out the form below or email us at <a href="mailto:info@resolvemun.org" style="color:var(--purple-bright)">info@resolvemun.org</a>.</p>
+
+        <form class="contact-form" id="contactForm" style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1.1rem;">
+          <label style="display:flex;flex-direction:column;gap:0.3rem;">
+            <span style="font-size:0.98rem;color:var(--lavender);font-weight:500;">Your Name</span>
+            <input type="text" name="name" id="name" required maxlength="100"
+              style="padding:0.7rem 1rem;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text-main);font-size:1rem;" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:0.3rem;">
+            <span style="font-size:0.98rem;color:var(--lavender);font-weight:500;">Your Mobile Number</span>
+            <input type="tel" name="phone" id="phone" required maxlength="15"
+              style="padding:0.7rem 1rem;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text-main);font-size:1rem;" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:0.3rem;">
+            <span style="font-size:0.98rem;color:var(--lavender);font-weight:500;">Message</span>
+            <textarea name="message" id="message" required maxlength="1200" rows="5"
+              style="padding:0.7rem 1rem;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text-main);font-size:1rem;resize:vertical;"></textarea>
+          </label>
+          <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%;font-size:1.1rem;">Send Message</button>
+          <p id="formStatus" style="text-align:center;font-size:0.95rem;display:none;"></p>
+        </form>
+
+        <p class="section-intro" style="margin-top:1.2rem;font-size:0.98rem;opacity:0.7;">You can also reach us on <a href="https://www.instagram.com/mun.resolve/" target="_blank" rel="noopener" style="color:var(--purple-bright)">Instagram</a>.</p>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <section>
+          <h5>Resolve MUN</h5>
+          <p>Resolve. Reform. Reconcile.</p>
+          <p>A premier Model UN conference building the next generation of global leaders.</p>
+        </section>
+        <section>
+          <h5>Conference</h5>
+          <p><a href="about.html">About</a></p>
+          <p><a href="committees.html">Committees</a></p>
+          <p><a href="venue.html">Venue</a></p>
+        </section>
+        <section>
+          <h5>Delegate</h5>
+          <p><a href="register.html">Register</a></p>
+          <p>Position Papers</p>
+          <p>Rules &amp; Procedure</p>
+          <p>Delegate Guide</p>
+        </section>
+        <section>
+          <h5>Connect</h5>
+          <p><a href="https://www.instagram.com/mun.resolve/" target="_blank" rel="noopener">Instagram</a></p>
+        </section>
+      </div>
+      <div class="footer-note">&copy; 2025 Resolve MUN. All rights reserved. Resolve · Reform · Reconcile</div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxFZC0mVznqRpSn6240wq0YSMCmAYPfe1RWdpTiHGjdtry2ujddplvCB14To4BHvSR/exec";
+
+      document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById("submitBtn");
+        const status = document.getElementById("formStatus");
+
+        btn.disabled = true;
+        btn.textContent = "Sending...";
+        status.style.display = "none";
+
+        const payload = {
+          name: document.getElementById("name").value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          message: document.getElementById("message").value.trim(),
+        };
+
+        try {
+          await fetch(APPS_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          status.textContent = "✅ Message sent! We'll get back to you soon.";
+          status.style.color = "var(--purple-bright)";
+          status.style.display = "block";
+          this.reset();
+        } catch (err) {
+          status.textContent = "❌ Something went wrong. Please email us directly.";
+          status.style.color = "#ef4444";
+          status.style.display = "block";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+        }
+      });
+    </script>
+  </body>
+</html>
