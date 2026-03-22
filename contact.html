@@ -88,39 +88,39 @@
     </footer>
     <script src="script.js"></script>
     <script>
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxFZC0mVznqRpSn6240wq0YSMCmAYPfe1RWdpTiHGjdtry2ujddplvCB14To4BHvSR/exec";
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxFZC0mVznqRpSn6240wq0YSMCmAYPfe1RWdpTiHGjdtry2ujddplvCB14To4BHvSR/exec";
 
-        document.getElementById("contactForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+      document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
 
-            const btn = document.getElementById("submitBtn");
-            const status = document.getElementById("formStatus");
+        const btn = document.getElementById("submitBtn");
+        const status = document.getElementById("formStatus");
 
-            btn.disabled = true;
-            btn.textContent = "Sending...";
-            status.style.display = "none";
+        btn.disabled = true;
+        btn.textContent = "Sending...";
+        status.style.display = "none";
 
-            const name = encodeURIComponent(document.getElementById("name").value.trim());
-            const phone = encodeURIComponent(document.getElementById("phone").value.trim());
-            const message = encodeURIComponent(document.getElementById("message").value.trim());
+        const name = encodeURIComponent(document.getElementById("name").value.trim());
+        const phone = encodeURIComponent(document.getElementById("phone").value.trim());
+        const message = encodeURIComponent(document.getElementById("message").value.trim());
 
-            const url = `${APPS_SCRIPT_URL}?name=${name}&phone=${phone}&message=${message}`;
+        const url = `${APPS_SCRIPT_URL}?name=${name}&phone=${phone}&message=${message}`;
 
-            // Use a script tag trick to avoid CORS entirely
-            const script = document.createElement("script");
-            script.src = url + "&callback=handleResponse";
-            document.body.appendChild(script);
+        // Use a script tag trick to avoid CORS entirely
+        const script = document.createElement("script");
+        script.src = url + "&callback=handleResponse";
+        document.body.appendChild(script);
 
-            // Fallback: assume success after 3 seconds if no response
-            setTimeout(function () {
-            status.textContent = "✅ Message sent! We'll get back to you soon.";
-            status.style.color = "var(--purple-bright)";
-            status.style.display = "block";
-            btn.disabled = false;
-            btn.textContent = "Send Message";
-            document.getElementById("contactForm").reset();
-            }, 3000);
-        });
+        // Fallback: assume success after 3 seconds if no response
+        setTimeout(function () {
+          status.textContent = "✅ Message sent! We'll get back to you soon.";
+          status.style.color = "var(--purple-bright)";
+          status.style.display = "block";
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+          document.getElementById("contactForm").reset();
+        }, 3000);
+      });
     </script>
   </body>
 </html>
